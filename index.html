@@ -3,36 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Roberto Hora | Transporte Executivo de Filhotes para Canis</title>
-  
+  <title>Roberto Hora · Transporte Executivo de Filhotes</title>
+  <meta name="description" content="Transporte executivo de filhotes de raça para canis e criadores com saídas de São Paulo. Máximo 2 a 3 pets por viagem, frota própria climatizada e acompanhamento ao vivo.">
+
+  <!-- Favicon SVG inline -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c59b4c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1 .4-1 1v7c0 .6.4 1 1 1h2'/><circle cx='7' cy='17' r='2'/><path d='M9 17h6'/><circle cx='17' cy='17' r='2'/></svg>">
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+
+  <!-- Google Fonts: Playfair Display (Serif) & Plus Jakarta Sans (Sans-Serif) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
           },
           colors: {
-            brand: {
-              50: '#f0fdf4',
-              100: '#dcfce7',
-              500: '#22c55e',
-              600: '#16a34a',
-              700: '#15803d',
+            charcoal: {
+              950: '#070a10',
+              900: '#0d121c',
+              850: '#121824',
+              800: '#172030',
+              700: '#202d42',
+              600: '#2d3e5b',
             },
-            accent: {
-              50: '#f0f9ff',
-              400: '#38bdf8',
-              500: '#0ea5e9',
-              600: '#0284c7',
+            cream: {
+              50: '#fdfdfc',
+              100: '#f9f8f5',
+              200: '#f2efe9',
+              300: '#e5e1d8',
+            },
+            gold: {
+              300: '#e2c58e',
+              400: '#d4af6a',
+              500: '#c59b4c',
+              600: '#aa8138',
+              700: '#876223',
+            },
+            emerald: {
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
             }
           }
         }
@@ -44,15 +62,11 @@
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
-    .glass-nav {
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+    .font-heading {
+      font-family: 'Playfair Display', Georgia, serif;
     }
-    .glass-card {
-      background: rgba(30, 41, 59, 0.7);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+    .hero-glow {
+      background: radial-gradient(circle at 50% 30%, rgba(197, 155, 76, 0.08) 0%, rgba(13, 18, 28, 0) 70%);
     }
     @media print {
       .no-print { display: none !important; }
@@ -60,365 +74,995 @@
     }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 antialiased selection:bg-sky-500 selection:text-white pb-28">
+<body class="bg-charcoal-900 text-slate-100 antialiased selection:bg-gold-500 selection:text-charcoal-950 pb-20 sm:pb-0">
 
-  <!-- Top Announcement Bar -->
-  <div class="bg-gradient-to-r from-sky-600 via-indigo-600 to-emerald-600 py-2 text-center text-xs font-semibold tracking-wider text-white uppercase px-4 shadow-sm">
-    🐾 Atendimento Exclusivo para Canis & Criadores de Raça • Saídas de São Paulo
-  </div>
+  <!-- ================================================================= -->
+  <!-- TOP ANNOUNCEMENT BAR                                              -->
+  <!-- ================================================================= -->
+  <!-- ================================================================= -->
+  <!-- HEADER / NAVBAR                                                   -->
+  <!-- ================================================================= -->
+  <header class="sticky top-0 z-40 bg-charcoal-900/90 backdrop-blur-md border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+      <a href="#" class="flex flex-col group">
+        <span class="font-heading text-xl sm:text-2xl font-semibold tracking-wide text-white group-hover:text-gold-400 transition-colors">
+          ROBERTO HORA
+        </span>
+        <span class="text-[10px] sm:text-[11px] tracking-[0.2em] uppercase text-gold-400 font-medium -mt-0.5">
+          Transporte Executivo de Filhotes
+        </span>
+      </a>
 
-  <!-- Hero Section -->
-  <header class="relative overflow-hidden pt-10 pb-16 px-4 sm:px-6 max-w-4xl mx-auto text-center">
-    <!-- Glow Effect -->
-    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-sky-500/15 rounded-full blur-3xl pointer-events-none"></div>
-    
-    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-400 text-xs font-bold uppercase tracking-wider mb-6">
-      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-      Transporte Dedicado & VIP
-    </div>
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden lg:flex items-center gap-7 text-xs uppercase tracking-wider font-medium text-slate-300">
+        <a href="#diferencial" class="hover:text-gold-400 transition-colors">Diferencial</a>
+        <a href="#sobre" class="hover:text-gold-400 transition-colors">Quem Sou Eu</a>
+        <a href="#frota" class="hover:text-gold-400 transition-colors">Frota</a>
+        <a href="#cuidado" class="hover:text-gold-400 transition-colors">Cuidado</a>
+        <a href="#garantias" class="hover:text-gold-400 transition-colors">Garantias</a>
+        <a href="#rotas" class="hover:text-gold-400 transition-colors">Rotas</a>
+        <a href="#contratacao" class="hover:text-gold-400 transition-colors">Como Funciona</a>
+        <a href="#faq" class="hover:text-gold-400 transition-colors">FAQ</a>
+      </nav>
 
-    <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight mb-5">
-      A Viagem Mais Segura para os <br class="hidden sm:inline">
-      <span class="bg-gradient-to-r from-sky-400 via-teal-300 to-emerald-400 bg-clip-text text-transparent">
-        Filhotes do seu Canil
-      </span>
-    </h1>
-
-    <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-8">
-      Esqueça vans lotadas com 20 animais empilhados. Transportamos no máximo <strong>2 a 3 filhotes por viagem</strong> em veículos próprios climatizados, com paradas humanizadas e vídeos em tempo real.
-    </p>
-
-    <!-- Badges Grid -->
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto text-left mb-10">
-      <div class="glass-card p-3.5 rounded-2xl flex items-center gap-3">
-        <span class="text-2xl">❄️</span>
-        <div>
-          <div class="text-xs text-slate-400 font-medium">Climatização</div>
-          <div class="text-sm font-bold text-slate-200">Ar Digital 21°C</div>
-        </div>
-      </div>
-      <div class="glass-card p-3.5 rounded-2xl flex items-center gap-3">
-        <span class="text-2xl">🐶</span>
-        <div>
-          <div class="text-xs text-slate-400 font-medium">Capacidade</div>
-          <div class="text-sm font-bold text-slate-200">Máx. 2 a 3 Pets</div>
-        </div>
-      </div>
-      <div class="glass-card p-3.5 rounded-2xl flex items-center gap-3">
-        <span class="text-2xl">📍</span>
-        <div>
-          <div class="text-xs text-slate-400 font-medium">Ao Vivo</div>
-          <div class="text-sm font-bold text-slate-200">GPS & Vídeos</div>
-        </div>
-      </div>
-      <div class="glass-card p-3.5 rounded-2xl flex items-center gap-3">
-        <span class="text-2xl">🛡️</span>
-        <div>
-          <div class="text-xs text-slate-400 font-medium">Segurança</div>
-          <div class="text-sm font-bold text-slate-200">Zero Contágio</div>
-        </div>
+      <!-- Desktop Nav CTA -->
+      <div class="hidden sm:flex items-center">
+        <a 
+          href="https://wa.me/?text=Ol%C3%A1%20Roberto!%20Gostaria%20de%20consultar%20uma%20vaga%20para%20transporte%20de%20filhote%20saindo%20de%20SP."
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-lg border border-gold-500/30 text-gold-300 hover:bg-gold-500/10 transition-all text-xs uppercase tracking-wider font-semibold"
+        >
+          <svg class="w-4 h-4 text-emerald-500 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+          </svg>
+          <span>WhatsApp Direto</span>
+        </a>
       </div>
     </div>
   </header>
 
-  <main class="max-w-4xl mx-auto px-4 sm:px-6 space-y-14">
+  <main>
+    <!-- ================================================================= -->
+    <!-- 1. HERO (Dark Charcoal)                                           -->
+    <!-- ================================================================= -->
+    <section class="relative pt-16 pb-20 sm:pt-24 sm:pb-28 px-4 sm:px-6 hero-glow border-b border-white/5 overflow-hidden">
+      <div class="max-w-4xl mx-auto text-center">
+        
+        <!-- Eyebrow -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-charcoal-850 border border-gold-500/20 text-gold-400 text-xs font-medium uppercase tracking-widest mb-8">
+          <span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+          Atendimento Exclusivo para Canis &amp; Criadores de Raça · Saídas de São Paulo
+        </div>
 
-    <!-- SEÇÃO: NOSSA FROTA PRÓPRIA (COM AS DUAS FOTOS REAIS) -->
-    <section>
-      <div class="text-center mb-8">
-        <span class="text-xs font-bold text-sky-400 tracking-wider uppercase">Conforto & Estabilidade</span>
-        <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Frota Própria Dedicada</h2>
-        <p class="text-slate-400 text-sm mt-2 max-w-xl mx-auto">
-          Veículos modernos, com suspensão macia, isolamento acústico superior e ar-condicionado contínuo.
+        <!-- Título (h1) -->
+        <h1 class="font-heading text-3xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-white leading-[1.18] mb-6">
+          A viagem mais segura para os filhotes do seu canil
+        </h1>
+
+        <!-- Parágrafo -->
+        <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-10 font-light">
+          Esqueça vans lotadas com mais de 20 animais empilhados. Transportamos no máximo 2 a 3 filhotes por viagem, em veículo próprio e climatizado, com paradas humanizadas e vídeos em tempo real a cada parada.
         </p>
-      </div>
 
-      <div class="grid sm:grid-cols-2 gap-6">
+        <!-- CTA Principal Hero -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+          <a 
+            href="https://wa.me/?text=Ol%C3%A1%20Roberto!%20Gostaria%20de%20consultar%20uma%20vaga%20para%20transporte%20de%20filhote%20saindo%20de%20SP."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-3.5 px-8 rounded-xl shadow-lg shadow-emerald-950/50 transition-all text-sm tracking-wide"
+          >
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            </svg>
+            <span>Consultar Vagas &amp; Cotação no WhatsApp</span>
+          </a>
+          <a 
+            href="#diferencial" 
+            class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 rounded-xl border border-slate-700 text-slate-300 hover:text-white hover:border-slate-500 transition-colors text-sm font-medium"
+          >
+            Conhecer os Diferenciais
+          </a>
+        </div>
+
+        <!-- Cards de estatística (4, lado a lado) -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-3xl mx-auto text-left">
+          
+          <!-- Card 1: Climatização -->
+          <div class="bg-charcoal-850/80 border border-white/5 rounded-xl p-4 hover:border-gold-500/30 transition-all">
+            <div class="w-8 h-8 rounded-lg bg-charcoal-800 flex items-center justify-center text-gold-400 mb-3">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z" />
+              </svg>
+            </div>
+            <div class="text-xs text-slate-400 font-medium">Climatização</div>
+            <div class="text-sm font-semibold text-slate-100 mt-0.5">Ar digital, 21°C</div>
+          </div>
+
+          <!-- Card 2: Capacidade -->
+          <div class="bg-charcoal-850/80 border border-white/5 rounded-xl p-4 hover:border-gold-500/30 transition-all">
+            <div class="w-8 h-8 rounded-lg bg-charcoal-800 flex items-center justify-center text-gold-400 mb-3">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <div class="text-xs text-slate-400 font-medium">Capacidade</div>
+            <div class="text-sm font-semibold text-slate-100 mt-0.5">Máx. 2 a 3 pets</div>
+          </div>
+
+          <!-- Card 3: Ao vivo -->
+          <div class="bg-charcoal-850/80 border border-white/5 rounded-xl p-4 hover:border-gold-500/30 transition-all">
+            <div class="w-8 h-8 rounded-lg bg-charcoal-800 flex items-center justify-center text-gold-400 mb-3">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div class="text-xs text-slate-400 font-medium">Ao vivo</div>
+            <div class="text-sm font-semibold text-slate-100 mt-0.5">GPS &amp; vídeos</div>
+          </div>
+
+          <!-- Card 4: Segurança -->
+          <div class="bg-charcoal-850/80 border border-white/5 rounded-xl p-4 hover:border-gold-500/30 transition-all">
+            <div class="w-8 h-8 rounded-lg bg-charcoal-800 flex items-center justify-center text-gold-400 mb-3">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <div class="text-xs text-slate-400 font-medium">Segurança</div>
+            <div class="text-sm font-semibold text-slate-100 mt-0.5">Protocolo sanitário</div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 2. DIFERENCIAL ABSOLUTO (Light Cream / Off-White)                 -->
+    <!-- ================================================================= -->
+    <section id="diferencial" class="py-20 sm:py-28 px-4 sm:px-6 bg-cream-100 text-slate-900 border-b border-stone-200">
+      <div class="max-w-5xl mx-auto">
         
-        <!-- Carro 1: T-Cross Comfortline -->
-        <div class="glass-card rounded-3xl overflow-hidden shadow-xl border border-slate-700/50 flex flex-col group hover:border-sky-500/40 transition-all duration-300">
-          <div class="relative h-60 w-full overflow-hidden bg-slate-900">
-            <img 
-              src="assets/1.jpg" 
-              alt="Volkswagen T-Cross Comfortline - Transporte de Filhotes" 
-              class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-            >
-            <div class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-sky-400 border border-sky-400/30">
-              SUV Executiva
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <div class="text-xs uppercase tracking-widest font-semibold text-gold-700 mb-3">
+            Diferencial Absoluto
+          </div>
+          <h2 class="font-heading text-2xl sm:text-4xl font-normal text-slate-900 leading-tight">
+            Por que canis responsáveis não usam vans coletivas?
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+          
+          <!-- Coluna 1: Vans / Transportadoras comuns -->
+          <div class="bg-white border border-stone-300/80 rounded-2xl p-7 sm:p-9 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-3 pb-5 mb-6 border-b border-stone-200">
+                <div class="w-9 h-9 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">O Mercado Comum</div>
+                  <h3 class="text-lg font-bold text-slate-800">Transportadoras comuns / vans</h3>
+                </div>
+              </div>
+
+              <ul class="space-y-4 text-sm text-slate-600">
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-rose-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="9" />
+                    <line x1="9" y1="9" x2="15" y2="15" />
+                  </svg>
+                  <span>Mais de 20 animais aglomerados no mesmo furgão fechado.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-rose-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="9" />
+                    <line x1="9" y1="9" x2="15" y2="15" />
+                  </svg>
+                  <span>Risco real de contaminação cruzada (parvovirose, giárdia, tosse dos canis).</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-rose-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="9" />
+                    <line x1="9" y1="9" x2="15" y2="15" />
+                  </svg>
+                  <span>Calor extremo ou ar insuficiente para todas as caixas.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-rose-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="9" />
+                    <line x1="9" y1="9" x2="15" y2="15" />
+                  </svg>
+                  <span>Roteiros que levam de 48h a 72h dando voltas intermináveis.</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="mt-8 pt-4 border-t border-stone-100 text-xs text-slate-500 italic">
+              Alto risco genético e sanitário para o histórico do canil.
             </div>
           </div>
-          <div class="p-6 flex-1 flex flex-col justify-between">
+
+          <!-- Coluna 2: Nosso transporte executivo -->
+          <div class="bg-white border-2 border-gold-500/40 rounded-2xl p-7 sm:p-9 shadow-md flex flex-col justify-between relative overflow-hidden">
+            <div class="absolute top-0 right-0 bg-gold-500 text-charcoal-950 text-[10px] uppercase font-bold tracking-widest px-3.5 py-1 rounded-bl-lg">
+              Padrão Canil de Raça
+            </div>
+
             <div>
-              <div class="flex items-center justify-between mb-2">
-                <h3 class="text-xl font-bold text-white">Volkswagen T-Cross</h3>
-                <span class="text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-md border border-emerald-500/20">Comfortline</span>
+              <div class="flex items-center gap-3 pb-5 mb-6 border-b border-stone-200">
+                <div class="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-xs font-semibold uppercase tracking-wider text-gold-700">Dedicação Exclusiva</div>
+                  <h3 class="text-lg font-bold text-slate-900">Nosso transporte executivo</h3>
+                </div>
               </div>
-              <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                Posição elevada, ampla área envidraçada protegida com insulfilm térmico e espaço perfeito para acomodação de caixas kennel médias e grandes com estabilidade total.
+
+              <ul class="space-y-4 text-sm text-slate-700 font-medium">
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Máximo 2 a 3 filhotes no carro todo, sem estresse.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Caixas individuais desinfetadas com virucida veterinário antes de cada viagem.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Ar-condicionado constante, direcionado na temperatura ideal.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Rota expressa direta: coleta em São Paulo e entrega no destino, sem rodeios.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-8 pt-4 border-t border-stone-100 text-xs text-gold-700 font-semibold flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Preservação integral da saúde e bem-estar do seu filhote.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 3. QUEM SOU EU (Dark Charcoal)                                    -->
+    <!-- ================================================================= -->
+    <section id="sobre" class="py-20 sm:py-28 px-4 sm:px-6 bg-charcoal-900 border-b border-white/5">
+      <div class="max-w-5xl mx-auto">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Foto do Fundador -->
+          <div class="lg:col-span-5 flex flex-col items-center">
+            <div class="relative w-full max-w-sm">
+              <!-- Moldura decorativa discreta -->
+              <div class="absolute -inset-2 rounded-2xl bg-gradient-to-br from-gold-500/20 via-transparent to-white/5 blur-sm"></div>
+              
+              <div class="relative bg-charcoal-850 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                <img 
+                  src="assets/roberto_web.jpg" 
+                  alt="Roberto Hora, motorista profissional fundador do transporte executivo de filhotes"
+                  class="w-full aspect-[4/5] object-cover object-top"
+                  loading="lazy"
+                >
+                <div class="p-4 bg-charcoal-850/95 border-t border-white/5 text-center">
+                  <div class="font-heading text-lg font-medium text-white">Roberto Hora</div>
+                  <div class="text-xs text-gold-400 font-medium uppercase tracking-wider">Fundador &amp; Motorista Profissional</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Texto Quem Sou Eu (Copy verbatim) -->
+          <div class="lg:col-span-7">
+            
+            <div class="text-xs uppercase tracking-widest font-semibold text-gold-400 mb-3">
+              Fundador &amp; Motorista Profissional
+            </div>
+            
+            <h2 class="font-heading text-2xl sm:text-4xl font-normal text-white leading-tight mb-8">
+              Quem Sou Eu
+            </h2>
+
+            <div class="space-y-5 text-slate-300 text-sm sm:text-base leading-relaxed font-light">
+              <p>
+                Olá! Me chamo Roberto Hora. Sou motorista profissional com mais de 12 anos de experiência no transporte rodoviário para todo o Brasil.
+              </p>
+              <p>
+                Ao longo de mais de uma década cruzando as principais rodovias do país, aprendi que segurança de verdade nasce da disciplina, da condução defensiva suave e do respeito absoluto à carga. Quando se trata de filhotes de raça, a responsabilidade é redobrada: não é uma mercadoria numa caixa; é uma vida que carrega meses de investimento genético do canil e o sonho de uma família.
+              </p>
+              <p>
+                Por isso, criei o transporte executivo: frota própria (T-Cross e Polo TSI), no máximo 2 a 3 filhotes por viagem, ar-condicionado contínuo, paradas a cada 2 horas e comunicação direta comigo no WhatsApp do início ao fim.
               </p>
             </div>
-            <div class="border-t border-slate-800 pt-4 flex items-center justify-between text-xs text-slate-300">
-              <span class="flex items-center gap-1.5"><span class="text-sky-400">✓</span> Ar Digital Climatronic</span>
-              <span class="flex items-center gap-1.5"><span class="text-sky-400">✓</span> Suspensão Suave</span>
-              <span class="flex items-center gap-1.5"><span class="text-sky-400">✓</span> Caixas Fixadas</span>
+
+            <!-- 3 Estatísticas de apoio -->
+            <div class="grid grid-cols-3 gap-4 mt-10 pt-8 border-t border-white/10">
+              <div>
+                <div class="text-2xl sm:text-3xl font-heading font-normal text-gold-400">+12 anos</div>
+                <div class="text-xs text-slate-400 mt-1">de profissão</div>
+              </div>
+              <div>
+                <div class="text-2xl sm:text-3xl font-heading font-normal text-white">Brasil todo</div>
+                <div class="text-xs text-slate-400 mt-1">cobertura nacional</div>
+              </div>
+              <div>
+                <div class="text-2xl sm:text-3xl font-heading font-normal text-gold-400">100% direto</div>
+                <div class="text-xs text-slate-400 mt-1">sem intermediários</div>
+              </div>
             </div>
+
           </div>
+
         </div>
 
-        <!-- Carro 2: Polo Comfortline -->
-        <div class="glass-card rounded-3xl overflow-hidden shadow-xl border border-slate-700/50 flex flex-col group hover:border-sky-500/40 transition-all duration-300">
-          <div class="relative h-60 w-full overflow-hidden bg-slate-900">
-            <img 
-              src="assets/2.jpg" 
-              alt="Volkswagen Polo 200 TSI Comfortline - Transporte de Filhotes" 
-              class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-            >
-            <div class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-indigo-400 border border-indigo-400/30">
-              Hatch Premium
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 4. FROTA PRÓPRIA (Light Cream / Off-White)                        -->
+    <!-- ================================================================= -->
+    <section id="frota" class="py-20 sm:py-28 px-4 sm:px-6 bg-cream-100 text-slate-900 border-b border-stone-200">
+      <div class="max-w-5xl mx-auto">
+        
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <div class="text-xs uppercase tracking-widest font-semibold text-gold-700 mb-3">
+            Conforto &amp; Estabilidade
+          </div>
+          <h2 class="font-heading text-2xl sm:text-4xl font-normal text-slate-900 leading-tight mb-4">
+            Frota própria dedicada
+          </h2>
+          <p class="text-slate-600 text-base leading-relaxed">
+            Veículos modernos, com suspensão macia, isolamento acústico superior e ar-condicionado contínuo.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- Card 1 — T-Cross -->
+          <div class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+            <div>
+              <div class="relative aspect-[16/10] overflow-hidden bg-stone-100">
+                <img 
+                  src="assets/1.jpg" 
+                  alt="Volkswagen T-Cross Comfortline para transporte de filhotes de médio e grande porte"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                >
+                <div class="absolute top-3 left-3 bg-charcoal-900/80 backdrop-blur-sm text-white text-[11px] font-medium tracking-wide uppercase px-3 py-1 rounded-md">
+                  SUV Executiva
+                </div>
+              </div>
+
+              <div class="p-6 sm:p-7">
+                <h3 class="text-xl font-bold text-slate-900 mb-3">
+                  Volkswagen T-Cross Comfortline
+                </h3>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                  Posição elevada, ampla área envidraçada protegida com insulfilm térmico e espaço perfeito para acomodação de caixas kennel médias e grandes com estabilidade total.
+                </p>
+              </div>
+            </div>
+
+            <!-- Selos Card 1 -->
+            <div class="px-6 pb-6 sm:px-7 sm:pb-7 pt-2 flex flex-wrap gap-2 border-t border-stone-100">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-stone-100 text-slate-700 text-xs font-medium">
+                <svg class="w-3.5 h-3.5 text-gold-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z" />
+                </svg>
+                Ar digital Climatronic
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-stone-100 text-slate-700 text-xs font-medium">
+                <svg class="w-3.5 h-3.5 text-gold-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                Suspensão suave
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-stone-100 text-slate-700 text-xs font-medium">
+                <svg class="w-3.5 h-3.5 text-gold-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                Caixas fixadas
+              </span>
             </div>
           </div>
-          <div class="p-6 flex-1 flex flex-col justify-between">
+
+          <!-- Card 2 — Polo TSI -->
+          <div class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
             <div>
-              <div class="flex items-center justify-between mb-2">
-                <h3 class="text-xl font-bold text-white">Volkswagen Polo 200 TSI</h3>
-                <span class="text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-md border border-emerald-500/20">Comfortline</span>
+              <div class="relative aspect-[16/10] overflow-hidden bg-stone-100">
+                <img 
+                  src="assets/2.jpg" 
+                  alt="Volkswagen Polo 200 TSI Comfortline para transporte de filhotes de pequeno porte"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                >
+                <div class="absolute top-3 left-3 bg-charcoal-900/80 backdrop-blur-sm text-white text-[11px] font-medium tracking-wide uppercase px-3 py-1 rounded-md">
+                  Hatch Premium
+                </div>
               </div>
-              <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                Excelente silêncio a bordo, rodar macio e ágil, com controle eletrônico de estabilidade. Ideal para filhotes de pequeno porte (Spitz, Bulldog, Maltês) que demandam viagem rápida e tranquila.
+
+              <div class="p-6 sm:p-7">
+                <h3 class="text-xl font-bold text-slate-900 mb-3">
+                  Volkswagen Polo 200 TSI Comfortline
+                </h3>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                  Excelente silêncio a bordo, rodar macio e ágil, com controle eletrônico de estabilidade. Ideal para filhotes de pequeno porte (Spitz, Bulldog, Maltês) que demandam viagem rápida e tranquila.
+                </p>
+              </div>
+            </div>
+
+            <!-- Selos Card 2 -->
+            <div class="px-6 pb-6 sm:px-7 sm:pb-7 pt-2 flex flex-wrap gap-2 border-t border-stone-100">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-stone-100 text-slate-700 text-xs font-medium">
+                <svg class="w-3.5 h-3.5 text-gold-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z" />
+                </svg>
+                Climatização 20°C
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-stone-100 text-slate-700 text-xs font-medium">
+                <svg class="w-3.5 h-3.5 text-gold-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                </svg>
+                Silêncio a bordo
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-stone-100 text-slate-700 text-xs font-medium">
+                <svg class="w-3.5 h-3.5 text-gold-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                Rota rápida
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 5. CUIDADO HUMANIZADO (Dark Charcoal)                             -->
+    <!-- ================================================================= -->
+    <section id="cuidado" class="py-20 sm:py-28 px-4 sm:px-6 bg-charcoal-900 border-b border-white/5">
+      <div class="max-w-5xl mx-auto">
+        
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <div class="text-xs uppercase tracking-widest font-semibold text-gold-400 mb-3">
+            Cuidado Humanizado
+          </div>
+          <h2 class="font-heading text-2xl sm:text-4xl font-normal text-white leading-tight">
+            Como cuidamos do seu filhote na estrada
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Item 1: Paradas a cada 2 horas -->
+          <div class="bg-charcoal-850/90 border border-white/5 rounded-2xl p-7 hover:border-gold-500/30 transition-all flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-charcoal-800 flex items-center justify-center text-gold-400 mb-6">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                  <circle cx="12" cy="12" r="9" />
+                  <polyline points="12 7 12 12 15 15" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-3">
+                Paradas a cada 2 horas
+              </h3>
+              <p class="text-sm text-slate-300 leading-relaxed font-light">
+                Pausas programadas em locais calmos para água mineral fresca, verificação do filhote e troca do tapete higiênico.
               </p>
             </div>
-            <div class="border-t border-slate-800 pt-4 flex items-center justify-between text-xs text-slate-300">
-              <span class="flex items-center gap-1.5"><span class="text-sky-400">✓</span> Climatização 20°C</span>
-              <span class="flex items-center gap-1.5"><span class="text-sky-400">✓</span> Silêncio a Bordo</span>
-              <span class="flex items-center gap-1.5"><span class="text-sky-400">✓</span> Rota Rápida</span>
+            <div class="mt-6 pt-4 border-t border-white/5 text-xs text-gold-400/80 font-medium">
+              Hidratação &amp; Higiene contínua
             </div>
           </div>
+
+          <!-- Item 2: Vídeos a cada parada -->
+          <div class="bg-charcoal-850/90 border border-white/5 rounded-2xl p-7 hover:border-gold-500/30 transition-all flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-charcoal-800 flex items-center justify-center text-gold-400 mb-6">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-3">
+                Vídeos a cada parada
+              </h3>
+              <p class="text-sm text-slate-300 leading-relaxed font-light">
+                Você e o tutor recebem vídeo e fotos no WhatsApp a cada parada, mostrando o filhote descansado e hidratado.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-white/5 text-xs text-gold-400/80 font-medium">
+              Tranquilidade em tempo real
+            </div>
+          </div>
+
+          <!-- Item 3: GPS em tempo real -->
+          <div class="bg-charcoal-850/90 border border-white/5 rounded-2xl p-7 hover:border-gold-500/30 transition-all flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-charcoal-800 flex items-center justify-center text-gold-400 mb-6">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-3">
+                GPS em tempo real
+              </h3>
+              <p class="text-sm text-slate-300 leading-relaxed font-light">
+                Localização compartilhada ao vivo pelo WhatsApp, para acompanhar o trajeto exato até a entrega.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-white/5 text-xs text-gold-400/80 font-medium">
+              Rastreamento transparente
+            </div>
+          </div>
+
         </div>
 
       </div>
     </section>
 
-    <!-- SEÇÃO: POR QUE ESCOLHER O TRANSPORTE EXECUTIVO (VS VANS COLETIVAS) -->
-    <section class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-800">
-      <div class="text-center max-w-xl mx-auto mb-8">
-        <span class="text-xs font-bold text-emerald-400 tracking-wider uppercase">Diferencial Absoluto</span>
-        <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Por que Canis Responsáveis Não Usam Vans Coletivas?</h2>
-      </div>
-
-      <div class="grid sm:grid-cols-2 gap-6">
-        <!-- O Risco das Transportadoras Comuns -->
-        <div class="bg-rose-950/20 border border-rose-900/30 rounded-2xl p-5">
-          <div class="flex items-center gap-2 text-rose-400 font-bold text-base mb-3">
-            <span>⚠️</span> Transportadoras Comuns / Vans
-          </div>
-          <ul class="space-y-2.5 text-xs sm:text-sm text-slate-300">
-            <li class="flex items-start gap-2"><span class="text-rose-400 font-bold">✕</span> 15 a 30 animais aglomerados no mesmo furgão fechado.</li>
-            <li class="flex items-start gap-2"><span class="text-rose-400 font-bold">✕</span> Risco crítico de contaminação cruzada (parvovirose, giárdia, tosse dos canis).</li>
-            <li class="flex items-start gap-2"><span class="text-rose-400 font-bold">✕</span> Calor extremo ou ar insuficiente para todas as caixas.</li>
-            <li class="flex items-start gap-2"><span class="text-rose-400 font-bold">✕</span> Roteiros que levam 48h a 72h dando voltas intermináveis.</li>
-          </ul>
-        </div>
-
-        <!-- Nosso Padrão Executivo -->
-        <div class="bg-emerald-950/20 border border-emerald-800/40 rounded-2xl p-5">
-          <div class="flex items-center gap-2 text-emerald-400 font-bold text-base mb-3">
-            <span>⭐</span> Nosso Transporte Executivo
-          </div>
-          <ul class="space-y-2.5 text-xs sm:text-sm text-slate-200">
-            <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✓</span> <strong>Máximo 2 a 3 filhotes</strong> no carro todo, sem estresse.</li>
-            <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✓</span> Caixas individuais desinfetadas com virucida veterinário.</li>
-            <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✓</span> Ar-condicionado constante direcionado na temperatura ideal.</li>
-            <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✓</span> Rota expressa direta: coletou em SP, entregou no destino sem rodeios.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- SEÇÃO: O PROTOCOLO DE CUIDADO DURANTE A VIAGEM -->
-    <section>
-      <div class="text-center mb-8">
-        <span class="text-xs font-bold text-sky-400 tracking-wider uppercase">Cuidado Humanizado</span>
-        <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Como Cuidamos do seu Filhote na Estrada</h2>
-      </div>
-
-      <div class="grid sm:grid-cols-3 gap-5">
+    <!-- ================================================================= -->
+    <!-- 6. NOSSAS GARANTIAS (Light Cream / Off-White - SEÇÃO NOVA)        -->
+    <!-- ================================================================= -->
+    <section id="garantias" class="py-20 sm:py-28 px-4 sm:px-6 bg-cream-100 text-slate-900 border-b border-stone-200">
+      <div class="max-w-5xl mx-auto">
         
-        <div class="glass-card p-6 rounded-2xl text-center flex flex-col items-center">
-          <div class="w-14 h-14 rounded-2xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center text-2xl text-sky-400 mb-4">
-            🍼
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <div class="text-xs uppercase tracking-widest font-semibold text-gold-700 mb-3">
+            Transparência Total
           </div>
-          <h3 class="text-base font-bold text-white mb-2">Paradas a Cada 2 Horas</h3>
-          <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
-            Pausas programadas em locais calmos para oferta de água mineral fresca, verificação do filhote e troca de tapete higiênico.
-          </p>
+          <h2 class="font-heading text-2xl sm:text-4xl font-normal text-slate-900 leading-tight">
+            Compromisso direto, sem intermediários
+          </h2>
         </div>
 
-        <div class="glass-card p-6 rounded-2xl text-center flex flex-col items-center">
-          <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-400/20 flex items-center justify-center text-2xl text-emerald-400 mb-4">
-            📹
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- Garantia 1 -->
+          <div class="bg-white border border-stone-200 rounded-2xl p-7 shadow-sm flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-stone-100 text-gold-700 flex items-center justify-center flex-shrink-0 mt-1">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-slate-900 mb-1.5">
+                Comunicação direta comigo
+              </h3>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                Sem central de atendimento: qualquer imprevisto, você fala comigo, no WhatsApp, na hora.
+              </p>
+            </div>
           </div>
-          <h3 class="text-base font-bold text-white mb-2">Vídeos a Cada Parada</h3>
-          <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
-            Você e o tutor recebem vídeos e fotos no WhatsApp a cada parada, mostrando o filhote descansando tranquilo e hidratado.
-          </p>
-        </div>
 
-        <div class="glass-card p-6 rounded-2xl text-center flex flex-col items-center">
-          <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-400/20 flex items-center justify-center text-2xl text-indigo-400 mb-4">
-            🛰️
+          <!-- Garantia 2 -->
+          <div class="bg-white border border-stone-200 rounded-2xl p-7 shadow-sm flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-stone-100 text-gold-700 flex items-center justify-center flex-shrink-0 mt-1">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-slate-900 mb-1.5">
+                Acompanhamento ao vivo
+              </h3>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                GPS e vídeos a cada parada — você não depende da minha palavra, você vê o trajeto acontecendo.
+              </p>
+            </div>
           </div>
-          <h3 class="text-base font-bold text-white mb-2">GPS em Tempo Real</h3>
-          <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
-            Compartilhamento de localização contínua pelo WhatsApp, permitindo acompanhar o trajeto exato até a entrega no endereço final.
-          </p>
+
+          <!-- Garantia 3 -->
+          <div class="bg-white border border-stone-200 rounded-2xl p-7 shadow-sm flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-stone-100 text-gold-700 flex items-center justify-center flex-shrink-0 mt-1">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1 .4-1 1v7c0 .6.4 1 1 1h2m10 0a2 2 0 100 4 2 2 0 000-4zm-10 0a2 2 0 100 4 2 2 0 000-4z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-slate-900 mb-1.5">
+                Frota própria e dedicada
+              </h3>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                T-Cross e Polo TSI usados só para esse serviço, nunca dividido com carga comum.
+              </p>
+            </div>
+          </div>
+
+          <!-- Garantia 4 -->
+          <div class="bg-white border border-stone-200 rounded-2xl p-7 shadow-sm flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-stone-100 text-gold-700 flex items-center justify-center flex-shrink-0 mt-1">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-slate-900 mb-1.5">
+                12 anos de estrada
+              </h3>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                Experiência real em rodovias brasileiras, não terceirizada.
+              </p>
+            </div>
+          </div>
+
         </div>
 
       </div>
     </section>
 
-
-    <!-- SEÇÃO: SOBRE O MOTORISTA & FUNDADOR -->
-    <section class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-800 overflow-hidden relative group">
-      <div class="absolute top-0 right-0 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-      <div class="grid md:grid-cols-12 gap-8 items-center">
+    <!-- ================================================================= -->
+    <!-- 7. COBERTURA DE ROTAS (Dark Charcoal)                             -->
+    <!-- ================================================================= -->
+    <section id="rotas" class="py-20 sm:py-28 px-4 sm:px-6 bg-charcoal-900 border-b border-white/5">
+      <div class="max-w-5xl mx-auto">
         
-        <!-- Foto de Roberto -->
-        <div class="md:col-span-5 flex flex-col items-center">
-          <div class="relative w-56 sm:w-64 aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border-2 border-sky-500/30 group-hover:border-sky-400/60 transition-all duration-300">
-            <img 
-              src="assets/roberto_web.jpg" 
-              alt="Roberto Hora - Fundador e Motorista Profissional" 
-              class="w-full h-full object-cover object-top"
-            >
-            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent p-4 text-center">
-              <div class="text-xs font-bold text-sky-400 uppercase tracking-wider">Direção Executiva</div>
-              <div class="text-sm font-extrabold text-white">Roberto Hora</div>
-            </div>
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <div class="text-xs uppercase tracking-widest font-semibold text-gold-400 mb-3">
+            Cobertura Completa
           </div>
-          <div class="mt-3 inline-flex items-center gap-2 text-xs text-slate-300 font-semibold bg-slate-900/90 border border-slate-800 px-3.5 py-1.5 rounded-full shadow-sm">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            +12 Anos de Profissão na Estrada
-          </div>
+          <h2 class="font-heading text-2xl sm:text-4xl font-normal text-white leading-tight">
+            Saídas frequentes de São Paulo
+          </h2>
         </div>
 
-        <!-- Bio e Texto -->
-        <div class="md:col-span-7 space-y-4">
-          <div>
-            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-sky-500/10 border border-sky-400/20 text-sky-400 text-xs font-bold uppercase tracking-wider mb-2">
-              Experiência Comprovada
+        <!-- Grade de Rotas (não texto corrido) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          
+          <div class="bg-charcoal-850 border border-white/5 rounded-xl p-5 hover:border-gold-500/30 transition-all flex items-center gap-3.5">
+            <div class="w-8 h-8 rounded-lg bg-charcoal-800 text-gold-400 flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+              </svg>
             </div>
-            <h2 class="text-2xl sm:text-3xl font-bold text-white">Motorista Profissional com Mais de 12 Anos de Estrada</h2>
-          </div>
-
-          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-            Olá! Me chamo <strong class="text-white">Roberto Hora</strong>. Sou motorista profissional com <strong class="text-emerald-400">mais de 12 anos de experiência</strong> no transporte rodoviário para todo o Brasil.
-          </p>
-
-          <p class="text-slate-400 text-sm leading-relaxed">
-            Ao longo de mais de uma década cruzando as principais rodovias do país, aprendi que segurança de verdade nasce da disciplina, da condução defensiva suave e do respeito absoluto à carga. Quando se trata de <strong class="text-slate-200">filhotes de raça</strong>, a responsabilidade é redobrada: <em>não é uma mercadoria numa caixa; é uma vida que carrega meses de investimento genético do canil e o sonho de uma família.</em>
-          </p>
-
-          <p class="text-slate-400 text-sm leading-relaxed">
-            Por isso, criei o transporte executivo: <strong>frota própria (T-Cross e Polo TSI), no máximo 2 a 3 filhotes por viagem, ar-condicionado contínuo, paradas a cada 2 horas e comunicação direta comigo no WhatsApp do início ao fim</strong>.
-          </p>
-
-          <!-- Badges de Experiência -->
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-2 text-center text-xs">
-            <div class="bg-slate-900/90 border border-slate-800 p-2.5 rounded-xl">
-              <div class="text-sky-400 font-extrabold text-base">+12 Anos</div>
-              <div class="text-slate-400 mt-0.5">de Profissão</div>
-            </div>
-            <div class="bg-slate-900/90 border border-slate-800 p-2.5 rounded-xl">
-              <div class="text-emerald-400 font-extrabold text-base">Brasil Todo</div>
-              <div class="text-slate-400 mt-0.5">Cobertura Nacional</div>
-            </div>
-            <div class="bg-slate-900/90 border border-slate-800 p-2.5 rounded-xl col-span-2 sm:col-span-1">
-              <div class="text-indigo-400 font-extrabold text-base">100% Direto</div>
-              <div class="text-slate-400 mt-0.5">Sem Intermediários</div>
+            <div class="text-sm font-medium text-slate-200">
+              SP ⇄ Rio de Janeiro &amp; Região dos Lagos
             </div>
           </div>
+
+          <div class="bg-charcoal-850 border border-white/5 rounded-xl p-5 hover:border-gold-500/30 transition-all flex items-center gap-3.5">
+            <div class="w-8 h-8 rounded-lg bg-charcoal-800 text-gold-400 flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+              </svg>
+            </div>
+            <div class="text-sm font-medium text-slate-200">
+              SP ⇄ Curitiba &amp; Paraná
+            </div>
+          </div>
+
+          <div class="bg-charcoal-850 border border-white/5 rounded-xl p-5 hover:border-gold-500/30 transition-all flex items-center gap-3.5">
+            <div class="w-8 h-8 rounded-lg bg-charcoal-800 text-gold-400 flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+              </svg>
+            </div>
+            <div class="text-sm font-medium text-slate-200">
+              SP ⇄ Belo Horizonte &amp; Sul de Minas
+            </div>
+          </div>
+
+          <div class="bg-charcoal-850 border border-white/5 rounded-xl p-5 hover:border-gold-500/30 transition-all flex items-center gap-3.5">
+            <div class="w-8 h-8 rounded-lg bg-charcoal-800 text-gold-400 flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+              </svg>
+            </div>
+            <div class="text-sm font-medium text-slate-200">
+              SP ⇄ Litoral Norte &amp; Baixada Santista
+            </div>
+          </div>
+
+          <div class="bg-charcoal-850 border border-white/5 rounded-xl p-5 hover:border-gold-500/30 transition-all flex items-center gap-3.5">
+            <div class="w-8 h-8 rounded-lg bg-charcoal-800 text-gold-400 flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+              </svg>
+            </div>
+            <div class="text-sm font-medium text-slate-200">
+              SP ⇄ Campinas, Ribeirão Preto &amp; Interior
+            </div>
+          </div>
+
+          <div class="bg-charcoal-850 border border-gold-500/20 rounded-xl p-5 hover:border-gold-500/40 transition-all flex items-center gap-3.5">
+            <div class="w-8 h-8 rounded-lg bg-gold-500/10 text-gold-400 flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div class="text-sm font-medium text-gold-300">
+              Rotas interestaduais sob demanda
+            </div>
+          </div>
+
         </div>
 
       </div>
     </section>
 
-    <!-- SEÇÃO: ROTAS ATENDIDAS -->
-    <section class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-800 text-center">
-      <span class="text-xs font-bold text-sky-400 tracking-wider uppercase">Cobertura Completa</span>
-      <h2 class="text-2xl font-bold text-white mt-1 mb-4">Saídas Frequentes de São Paulo</h2>
-      
-      <div class="flex flex-wrap justify-center gap-2.5 max-w-2xl mx-auto text-xs sm:text-sm font-medium">
-        <span class="px-3.5 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700 text-slate-200">📍 SP ⇄ Rio de Janeiro & Região dos Lagos</span>
-        <span class="px-3.5 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700 text-slate-200">📍 SP ⇄ Curitiba & Paraná</span>
-        <span class="px-3.5 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700 text-slate-200">📍 SP ⇄ Belo Horizonte & Sul de Minas</span>
-        <span class="px-3.5 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700 text-slate-200">📍 SP ⇄ Litoral Norte & Baixada Santista</span>
-        <span class="px-3.5 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700 text-slate-200">📍 SP ⇄ Campinas, Ribeirão Preto & Interior</span>
-        <span class="px-3.5 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700 text-slate-200">📍 Rotas Interestaduais sob Demanda</span>
+    <!-- ================================================================= -->
+    <!-- 8. COMO FUNCIONA A CONTRATAÇÃO (Light Cream / Off-White)          -->
+    <!-- ================================================================= -->
+    <section id="contratacao" class="py-20 sm:py-28 px-4 sm:px-6 bg-cream-100 text-slate-900 border-b border-stone-200">
+      <div class="max-w-5xl mx-auto">
+        
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <div class="text-xs uppercase tracking-widest font-semibold text-gold-700 mb-3">
+            Simples e Seguro
+          </div>
+          <h2 class="font-heading text-2xl sm:text-4xl font-normal text-slate-900 leading-tight">
+            Como funciona a contratação
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Passo 1 -->
+          <div class="bg-white border border-stone-200 rounded-2xl p-7 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-charcoal-900 text-gold-400 font-heading text-lg font-bold flex items-center justify-center mb-6">
+                01
+              </div>
+              <h3 class="text-base font-bold text-slate-900 mb-2">
+                Você passa o destino e a data
+              </h3>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                Informe a raça do filhote, a cidade de entrega e a janela de horário em que o comprador pode recebê-lo.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="bg-white border border-stone-200 rounded-2xl p-7 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-charcoal-900 text-gold-400 font-heading text-lg font-bold flex items-center justify-center mb-6">
+                02
+              </div>
+              <h3 class="text-base font-bold text-slate-900 mb-2">
+                Reserva da vaga (sinal de 50%)
+              </h3>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                Garantia de que a vaga do carro está reservada exclusivamente para o seu animal.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="bg-white border border-stone-200 rounded-2xl p-7 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-charcoal-900 text-gold-400 font-heading text-lg font-bold flex items-center justify-center mb-6">
+                03
+              </div>
+              <h3 class="text-base font-bold text-slate-900 mb-2">
+                Coleta no canil e entrega pontual
+              </h3>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                Buscamos no seu canil no horário combinado e entregamos em mãos na porta do tutor.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </section>
 
-    <!-- SEÇÃO: PASSO A PASSO DA RESERVA -->
-    <section class="max-w-2xl mx-auto">
-      <div class="text-center mb-8">
-        <span class="text-xs font-bold text-emerald-400 tracking-wider uppercase">Simples e Seguro</span>
-        <h2 class="text-2xl font-bold text-white mt-1">Como Funciona a Contratação</h2>
-      </div>
-
-      <div class="space-y-4">
-        <div class="glass-card p-5 rounded-2xl flex items-center gap-4">
-          <div class="w-10 h-10 rounded-xl bg-sky-600 text-white font-extrabold flex items-center justify-center flex-shrink-0">
-            1
+    <!-- ================================================================= -->
+    <!-- 9. PERGUNTAS FREQUENTES (Dark Charcoal - SEÇÃO NOVA)              -->
+    <!-- ================================================================= -->
+    <section id="faq" class="py-20 sm:py-28 px-4 sm:px-6 bg-charcoal-900 border-b border-white/5">
+      <div class="max-w-4xl mx-auto">
+        
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <div class="text-xs uppercase tracking-widest font-semibold text-gold-400 mb-3">
+            Perguntas Frequentes
           </div>
-          <div>
-            <h4 class="font-bold text-white text-sm sm:text-base">Você passa o destino e a data</h4>
-            <p class="text-slate-400 text-xs sm:text-sm">Informa a raça do filhote, cidade de entrega e a janela que o comprador pode receber.</p>
-          </div>
+          <h2 class="font-heading text-2xl sm:text-4xl font-normal text-white leading-tight">
+            Perguntas Frequentes
+          </h2>
         </div>
 
-        <div class="glass-card p-5 rounded-2xl flex items-center gap-4">
-          <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white font-extrabold flex items-center justify-center flex-shrink-0">
-            2
-          </div>
-          <div>
-            <h4 class="font-bold text-white text-sm sm:text-base">Reserva da vaga (Sinal de 50%)</h4>
-            <p class="text-slate-400 text-xs sm:text-sm">Garantia de que a vaga do carro está reservada exclusivamente para o seu animal.</p>
-          </div>
+        <div class="space-y-4">
+          
+          <!-- FAQ 1 -->
+          <details class="group bg-charcoal-850/80 border border-white/5 rounded-xl p-6 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:border-gold-500/30 transition-all">
+            <summary class="flex items-center justify-between text-left text-base font-semibold text-slate-100 group-hover:text-gold-400 transition-colors">
+              <span>O transporte é aéreo ou rodoviário?</span>
+              <svg class="w-5 h-5 text-slate-400 group-hover:text-gold-400 transition-transform group-open:rotate-180 flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <p class="mt-4 text-sm text-slate-300 leading-relaxed font-light border-t border-white/5 pt-4">
+              100% rodoviário, em veículo próprio, do início ao fim — sem despacho aéreo e sem intermediários.
+            </p>
+          </details>
+
+          <!-- FAQ 2 -->
+          <details class="group bg-charcoal-850/80 border border-white/5 rounded-xl p-6 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:border-gold-500/30 transition-all">
+            <summary class="flex items-center justify-between text-left text-base font-semibold text-slate-100 group-hover:text-gold-400 transition-colors">
+              <span>Consigo acompanhar o trajeto?</span>
+              <svg class="w-5 h-5 text-slate-400 group-hover:text-gold-400 transition-transform group-open:rotate-180 flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <p class="mt-4 text-sm text-slate-300 leading-relaxed font-light border-t border-white/5 pt-4">
+              Sim. Você recebe localização ao vivo e vídeos a cada parada, direto no WhatsApp.
+            </p>
+          </details>
+
+          <!-- FAQ 3 -->
+          <details class="group bg-charcoal-850/80 border border-white/5 rounded-xl p-6 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:border-gold-500/30 transition-all">
+            <summary class="flex items-center justify-between text-left text-base font-semibold text-slate-100 group-hover:text-gold-400 transition-colors">
+              <span>Quais portes vocês atendem?</span>
+              <svg class="w-5 h-5 text-slate-400 group-hover:text-gold-400 transition-transform group-open:rotate-180 flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <p class="mt-4 text-sm text-slate-300 leading-relaxed font-light border-t border-white/5 pt-4">
+              Qualquer porte: a T-Cross recebe caixas médias e grandes, e o Polo TSI é ideal para portes pequenos, como Spitz, Bulldog e Maltês.
+            </p>
+          </details>
+
+          <!-- FAQ 4 (Placeholder) -->
+          <details class="group bg-charcoal-850/80 border border-white/5 rounded-xl p-6 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:border-gold-500/30 transition-all">
+            <summary class="flex items-center justify-between text-left text-base font-semibold text-slate-100 group-hover:text-gold-400 transition-colors">
+              <span>O sinal de 50% é reembolsável em caso de cancelamento?</span>
+              <svg class="w-5 h-5 text-slate-400 group-hover:text-gold-400 transition-transform group-open:rotate-180 flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <p class="mt-4 text-sm text-amber-200/90 leading-relaxed font-light border-t border-white/5 pt-4 italic">
+              [PLACEHOLDER — Roberto vai definir e inserir a política oficial aqui. Não preencher com informação inventada.]
+            </p>
+          </details>
+
+          <!-- FAQ 5 (Placeholder) -->
+          <details class="group bg-charcoal-850/80 border border-white/5 rounded-xl p-6 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:border-gold-500/30 transition-all">
+            <summary class="flex items-center justify-between text-left text-base font-semibold text-slate-100 group-hover:text-gold-400 transition-colors">
+              <span>Existe seguro para o filhote durante o transporte?</span>
+              <svg class="w-5 h-5 text-slate-400 group-hover:text-gold-400 transition-transform group-open:rotate-180 flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <p class="mt-4 text-sm text-amber-200/90 leading-relaxed font-light border-t border-white/5 pt-4 italic">
+              [PLACEHOLDER — Roberto vai confirmar cobertura e termos. Não preencher com informação inventada.]
+            </p>
+          </details>
+
         </div>
 
-        <div class="glass-card p-5 rounded-2xl flex items-center gap-4">
-          <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white font-extrabold flex items-center justify-center flex-shrink-0">
-            3
-          </div>
-          <div>
-            <h4 class="font-bold text-white text-sm sm:text-base">Coleta no canil e entrega pontual</h4>
-            <p class="text-slate-400 text-xs sm:text-sm">Buscamos no seu canil no horário combinado e entregamos em mãos na porta do tutor.</p>
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- FOOTER DA MARCA -->
-    <footer class="text-center pt-8 border-t border-slate-800/80 text-xs text-slate-500">
-      <p class="font-bold text-slate-300 text-sm mb-1">Roberto Hora • Transporte Executivo de Filhotes</p>
-      <p>Veículos Próprios: Volkswagen T-Cross Comfortline & Polo 200 TSI</p>
-      <p class="mt-1">São Paulo - SP • Atendimento em todo o território nacional</p>
+    <!-- ================================================================= -->
+    <!-- 10. RODAPÉ + CTA (Deep Charcoal / Footer)                         -->
+    <!-- ================================================================= -->
+    <footer class="bg-charcoal-950 text-slate-400 pt-16 pb-12 px-4 sm:px-6 border-t border-white/5">
+      <div class="max-w-5xl mx-auto">
+        
+        <!-- CTA Banner Central -->
+        <div class="bg-gradient-to-b from-charcoal-900 to-charcoal-850 border border-gold-500/30 rounded-2xl p-8 sm:p-12 text-center mb-16 shadow-2xl relative overflow-hidden">
+          <div class="absolute top-0 right-1/4 w-72 h-72 bg-gold-500/5 rounded-full blur-3xl pointer-events-none"></div>
+          
+          <div class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-gold-400 font-semibold mb-4">
+            <span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+            Reservas Diretas com o Motorista
+          </div>
+
+          <h2 class="font-heading text-2xl sm:text-4xl font-normal text-white leading-tight mb-4">
+            Pronto para agendar o transporte seguro do seu filhote?
+          </h2>
+
+          <p class="text-slate-300 text-sm sm:text-base max-w-xl mx-auto mb-8 font-light leading-relaxed">
+            Consulte disponibilidade de agenda, tire dúvidas sobre as rotas e reserve a vaga exclusiva com atendimento direto.
+          </p>
+
+          <a 
+            href="https://wa.me/?text=Ol%C3%A1%20Roberto!%20Gostaria%20de%20consultar%20uma%20vaga%20para%20transporte%20de%20filhote%20saindo%20de%20SP."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-3 bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-4 px-8 rounded-xl shadow-lg shadow-emerald-950/50 transition-all text-sm tracking-wide"
+          >
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            </svg>
+            <span>Consultar Vagas &amp; Cotação no WhatsApp</span>
+          </a>
+        </div>
+
+        <!-- Informações Oficiais de Rodapé -->
+        <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-400 text-center md:text-left">
+          <div>
+            <p class="font-bold text-slate-200 text-sm mb-1">
+              Roberto Hora · Transporte Executivo de Filhotes
+            </p>
+            <p>Veículos Próprios: Volkswagen T-Cross Comfortline &amp; Polo 200 TSI</p>
+            <p class="mt-0.5">São Paulo - SP · Atendimento em todo o território nacional</p>
+          </div>
+
+          <div class="text-right">
+            <p class="text-slate-500 italic text-[11px]">
+              [PLACEHOLDER — CNPJ/MEI, quando a regularização estiver concluída]
+            </p>
+            <p class="text-slate-500 text-[11px] mt-1">
+              © 2026 Roberto Hora. Todos os direitos reservados.
+            </p>
+          </div>
+        </div>
+
+      </div>
     </footer>
-
   </main>
 
-  <!-- BOTÃO FLUTUANTE FIXO NO RODAPÉ (MOBILE FRIENDLY) -->
-  <div class="fixed bottom-0 left-0 right-0 p-4 glass-nav border-t border-slate-800 z-50 flex justify-center no-print">
+  <!-- ================================================================= -->
+  <!-- BOTAO FLUTUANTE / FIXO DE WHATSAPP (RESPONSIVO)                   -->
+  <!-- ================================================================= -->
+  <!-- Mobile: Barra inferior fixa -->
+  <div class="fixed bottom-0 left-0 right-0 p-3 bg-charcoal-950/95 backdrop-blur-md border-t border-white/10 z-50 sm:hidden flex justify-center no-print">
     <a 
-      href="https://wa.me/?text=Ol%C3%A1%20Roberto!%20Gostaria%20de%20consultar%20uma%20vaga%20para%20transporte%20de%20filhote%20saindo%20de%20SP." 
-      class="w-full max-w-md bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold py-4 px-6 rounded-2xl shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-3 text-base transition-transform active:scale-95"
+      href="https://wa.me/?text=Ol%C3%A1%20Roberto!%20Gostaria%20de%20consultar%20uma%20vaga%20para%20transporte%20de%20filhote%20saindo%20de%20SP."
+      target="_blank"
+      rel="noopener noreferrer"
+      class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-3 px-4 rounded-xl shadow-lg flex items-center justify-center gap-2.5 text-sm active:scale-95 transition-all"
     >
-      <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+      <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
       </svg>
-      <span>Consultar Vagas & Cotação no WhatsApp</span>
+      <span>Consultar Vagas &amp; Cotação</span>
     </a>
   </div>
+
+  <!-- Desktop: Botão flutuante no canto inferior direito -->
+  <aside aria-label="Atendimento rápido via WhatsApp" class="hidden sm:block fixed bottom-8 right-8 z-50 no-print">
+    <a 
+      href="https://wa.me/?text=Ol%C3%A1%20Roberto!%20Gostaria%20de%20consultar%20uma%20vaga%20para%20transporte%20de%20filhote%20saindo%20de%20SP."
+      target="_blank"
+      rel="noopener noreferrer"
+      class="group flex items-center gap-3 bg-charcoal-850/95 hover:bg-charcoal-800 text-white pl-4 pr-5 py-3 rounded-full shadow-2xl border border-gold-500/30 hover:border-gold-500 transition-all hover:scale-105"
+      aria-label="Falar com Roberto Hora no WhatsApp"
+    >
+      <div class="relative">
+        <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-500 rounded-full animate-ping"></span>
+        <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-500 rounded-full"></span>
+        <div class="w-9 h-9 rounded-full bg-emerald-600 flex items-center justify-center text-white">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+          </svg>
+        </div>
+      </div>
+      <div>
+        <div class="text-[11px] text-slate-400 font-medium">Atendimento Direto</div>
+        <div class="text-xs font-bold text-slate-100 group-hover:text-gold-300 transition-colors">Consultar Vagas no WhatsApp</div>
+      </div>
+    </a>
+  </aside>
 
 </body>
 </html>
