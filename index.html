@@ -1040,6 +1040,38 @@
                 </div>
               </div>
 
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <label class="block text-xs uppercase tracking-wider font-semibold text-slate-300">
+                    Vacinas e Documentação em Dia?
+                  </label>
+                  <span class="text-[11px] text-slate-400">Exigência sanitária</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <label class="cursor-pointer">
+                    <input type="radio" name="vacinasDoc" value="Sim (Tudo em dia)" checked class="peer sr-only">
+                    <div class="p-3.5 rounded-xl bg-charcoal-900 border border-white/10 text-left peer-checked:border-gold-500 peer-checked:bg-gold-500/10 transition-all">
+                      <div class="text-sm font-semibold text-slate-200 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
+                        Sim, tudo em dia
+                      </div>
+                      <div class="text-[11px] text-slate-400 mt-1">Carteira vacinal e atestado veterinário.</div>
+                    </div>
+                  </label>
+
+                  <label class="cursor-pointer">
+                    <input type="radio" name="vacinasDoc" value="Não / Em regularização" class="peer sr-only">
+                    <div class="p-3.5 rounded-xl bg-charcoal-900 border border-white/10 text-left peer-checked:border-gold-500 peer-checked:bg-gold-500/10 transition-all">
+                      <div class="text-sm font-semibold text-slate-200 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-amber-500 inline-block"></span>
+                        Não / Em andamento
+                      </div>
+                      <div class="text-[11px] text-slate-400 mt-1">Ainda vou providenciar antes da viagem.</div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
               <div class="pt-4 flex items-center justify-between">
                 <button 
                   type="button" 
@@ -1536,6 +1568,7 @@
             raca: document.getElementById('raca').value,
             porte: (form.querySelector('input[name="porte"]:checked') || {}).value || 'Pequeno',
             qtdPets: (form.querySelector('input[name="qtdPets"]:checked') || {}).value || '1',
+            vacinasDoc: (form.querySelector('input[name="vacinasDoc"]:checked') || {}).value || 'Sim (Tudo em dia)',
             modalidade: (form.querySelector('input[name="modalidade"]:checked') || {}).value || 'Vaga Executiva',
             dataPrevista: document.getElementById('dataPrevista').value,
             nome: document.getElementById('nome').value,

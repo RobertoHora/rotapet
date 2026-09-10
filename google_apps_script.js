@@ -40,6 +40,7 @@ function setupPlanilha() {
     'Espécie / Raça',
     'Porte',
     'Qtd Pets',
+    'Vacinas e Atestado',
     'Modalidade',
     'Data Prevista',
     'Distância Estimada (km)',
@@ -98,6 +99,7 @@ function doPost(e) {
       'Espécie / Raça',
       'Porte',
       'Qtd Pets',
+      'Vacinas e Atestado',
       'Modalidade',
       'Data Prevista',
       'Distância Estimada (km)',
@@ -135,6 +137,7 @@ function doPost(e) {
     var raca = data.raca || 'Pet';
     var porte = data.porte || 'Médio';
     var qtdPets = parseInt(data.qtdPets || '1', 10) || 1;
+    var vacinasDoc = data.vacinasDoc || 'Sim (Tudo em dia)';
     var modalidade = data.modalidade || 'Vaga Executiva';
     var dataPrevista = data.dataPrevista || 'A combinar';
 
@@ -182,7 +185,7 @@ function doPost(e) {
       'O valor para o transporte dedicado e climatizado fica em R$ ' + valorSugerido.toLocaleString('pt-BR') + 
       ' com paradas a cada 2h, vídeos ao vivo e acompanhamento por GPS. Podemos reservar para a data ' + dataPrevista + '?';
 
-    // Linha completa com todos os custos discriminados
+    // Linha completa com todos os dados e custos discriminados
     var newRow = [
       dataHora,
       nome,
@@ -193,6 +196,7 @@ function doPost(e) {
       raca,
       porte,
       qtdPets,
+      vacinasDoc,
       modalidade,
       dataPrevista,
       estimativaKm,
