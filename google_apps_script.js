@@ -386,9 +386,12 @@ function formatarMoeda(valor) {
 
 function calcularDistanciaReal(origem, destino) {
   try {
+    var origemQuery = formatarEnderecoMaps(origem);
+    var destinoQuery = formatarEnderecoMaps(destino);
+
     var directions = Maps.newDirectionFinder()
-      .setOrigin(origem + ", Brasil")
-      .setDestination(destino + ", Brasil")
+      .setOrigin(origemQuery)
+      .setDestination(destinoQuery)
       .setMode(Maps.DirectionFinder.Mode.DRIVING)
       .getDirections();
 
@@ -405,6 +408,34 @@ function calcularDistanciaReal(origem, destino) {
   }
 
   return calcularDistanciaFallback(origem, destino);
+}
+
+function formatarEnderecoMaps(texto) {
+  if (!texto) return "Brasil";
+  var t = texto.trim();
+  if (t.indexOf(" - ") !== -1) {
+    var partes = t.split(" - ");
+    var cidade = partes[0].trim();
+    var uf = partes[1].trim().toUpperCase();
+    var estado = nomeDoEstado(uf);
+    return cidade + ", Estado de " + estado + ", Brasil";
+  }
+  return t + ", Brasil";
+}
+
+function nomeDoEstado(uf) {
+  var mapa = {
+    "AC": "Acre", "AL": "Alagoas", "AP": "Amapá", "AM": "Amazonas",
+    "BA": "Bahia", "CE": "Ceará", "DF": "Distrito Federal",
+    "ES": "Espírito Santo", "GO": "Goiás", "MA": "Maranhão",
+    "MT": "Mato Grosso", "MS": "Mato Grosso do Sul", "MG": "Minas Gerais",
+    "PA": "Pará", "PB": "Paraíba", "PR": "Paraná",
+    "PE": "Pernambuco", "PI": "Piauí", "RJ": "Rio de Janeiro",
+    "RN": "Rio Grande do Norte", "RS": "Rio Grande do Sul",
+    "RO": "Rondônia", "RR": "Roraima", "SC": "Santa Catarina",
+    "SP": "São Paulo", "SE": "Sergipe", "TO": "Tocantins"
+  };
+  return mapa[uf] || uf;
 }
 
 function calcularDistanciaFallback(origem, destino) {
