@@ -42,7 +42,8 @@ function setupPlanilha() {
   
   var sheets = ss.getSheets();
   for (var i = 0; i < sheets.length; i++) {
-    if (sheets[i].getName() !== "Pedidos de Orçamento" && sheets[i].getName() !== "Prospecção de Clientes") {
+    var nomeAba = sheets[i].getName();
+    if (nomeAba !== "Pedidos de Orçamento" && nomeAba !== "Prospecção de Clientes") {
       sheets[i].setName("Prospecção de Clientes");
       break;
     }
@@ -177,7 +178,8 @@ function doPost(e) {
     var alimentacao = diasViagem * 70.00;
     var pernoiteHotel = (diasViagem > 1) ? (diasViagem - 1) * 180.00 : 0;
 
-    var custoOperacionalTotal = combustivelPedagio + aluguelCarro + alimentacao + pernoiteHotel;
+    var custoOperacionalTotal = combustivelPedagio + aluguelCarro +
+      alimentacao + pernoiteHotel;
     var margemRoberto = diasViagem * qtdPets * 300.00;
 
     var fatorModalidade = (modalidade.toLowerCase().indexOf("exclusivo") !== -1) ? 1.30 : 1.0;
@@ -185,12 +187,35 @@ function doPost(e) {
     valorSugerido = Math.ceil(valorSugerido / 50) * 50;
 
     var valorFormatado = formatarMoeda(valorSugerido);
-    var petDescricao = qtdPets + (qtdPets > 1 ? " filhotes " : " filhote ") + (raca ? raca.replace(/^filhotes?\s+/i, "") : "pet");
+    var sufixoPet = (qtdPets > 1) ? " filhotes " : " filhote ";
+    var nomeRaca = raca ? raca.replace(/^filhotes?\s+/i, "") : "pet";
+    var petDescricao = qtdPets + sufixoPet + nomeRaca;
 
     // Mensagem padrao de orcamento para envio ao cliente
-    var parte1 = "Olá, " + nome + "! Aqui é o Roberto Hora, da RotaPet \u2014 transporte executivo de filhotes.";
-    var parte2 = "Recebi sua solicitação: transporte de " + origem + " até " + destino + ", para " + petDescricao + ".";
-    var parte3 = "O valor do transporte dedicado e climatizado é de " + valorFormatado + ", com paradas a cada 2h, vídeos ao vivo e acompanhamento por GPS.";
+    var parte1 = [
+      "Olá, ",
+      nome,
+      "! Aqui é o Roberto Hora, da RotaPet ",
+      "\u2014 transporte executivo de filhotes."
+    ].join("");
+
+    var parte2 = [
+      "Recebi sua solicitação: transporte de ",
+      origem,
+      " até ",
+      destino,
+      ", para ",
+      petDescricao,
+      "."
+    ].join("");
+
+    var parte3 = [
+      "O valor do transporte dedicado e climatizado é de ",
+      valorFormatado,
+      ", com paradas a cada 2h, ",
+      "vídeos ao vivo e acompanhamento por GPS."
+    ].join("");
+
     var parte4 = "Vamos falar sobre a data de retirada?";
     var msgPronta = [parte1, parte2, parte3, parte4].join("\n");
 
@@ -242,11 +267,13 @@ function doPost(e) {
       msgPronta: msgPronta
     });
 
-    return ContentService.createTextOutput(JSON.stringify({ status: "success", orcamento: valorSugerido }))
+    var jsonOk = JSON.stringify({ status: "success", orcamento: valorSugerido });
+    return ContentService.createTextOutput(jsonOk)
       .setMimeType(ContentService.MimeType.JSON);
 
   } catch (error) {
-    return ContentService.createTextOutput(JSON.stringify({ status: "error", message: error.toString() }))
+    var jsonErr = JSON.stringify({ status: "error", message: error.toString() });
+    return ContentService.createTextOutput(jsonErr)
       .setMimeType(ContentService.MimeType.JSON);
   }
 }
@@ -302,7 +329,8 @@ function notificarOracio(dados) {
       var textoTelegram = "🚗 *Nova Solicitação Taxi Dog*\n\n" +
         "👤 *Cliente:* " + dados.nome + "\n" +
         "📱 *WhatsApp:* " + dados.whatsapp + "\n" +
-        "📍 *Rota:* " + dados.origem + " ➔ " + dados.destino + " (" + dados.estimativaKm + " km)\n" +
+        "📍 *Rota:* " + dados.origem + " ➔ " + dados.destino + "\n" +
+        "📏 *Distância:* " + dados.estimativaKm + " km\n" +
         "🐾 *Pet:* " + dados.petDescricao + "\n" +
         "💉 *Vacinas/Doc:* " + dados.vacinasDoc + "\n" +
         "💰 *Valor Calculado:* " + dados.valorFormatado;
@@ -322,7 +350,8 @@ function notificarOracio(dados) {
       };
 
       if (numTelefone) {
-        var zapUrl = "https://api.whatsapp.com/send?phone=" + numTelefone + "&text=" + encodeURIComponent(dados.msgPronta);
+        var txtZap = encodeURIComponent(dados.msgPronta);
+        var zapUrl = "https://api.whatsapp.com/send?phone=" + numTelefone + "&text=" + txtZap;
         payloadTelegram.reply_markup = {
           inline_keyboard: [
             [
@@ -388,7 +417,7 @@ function calcularDistanciaFallback(origem, destino) {
     if (dest.indexOf("belo horizonte") !== -1 || dest.indexOf("mg") !== -1) return 585;
     if (dest.indexOf("campinas") !== -1 || dest.indexOf("ribeir") !== -1) return 240;
     if (dest.indexOf("santos") !== -1 || dest.indexOf("litoral") !== -1) return 95;
-    if (dest.indexOf("teresina") !== -1 || dest.indexOf("piaui") !== -1 || dest.indexOf("pi") !== -1) return 2750;
+    if (dest.indexOf("teresina") !== -1 || dest.indexOf("pi") !== -1) return 2750;
     if (dest.indexOf("brasilia") !== -1 || dest.indexOf("df") !== -1) return 1010;
     if (dest.indexOf("florian") !== -1 || dest.indexOf("sc") !== -1) return 705;
     if (dest.indexOf("porto alegre") !== -1 || dest.indexOf("rs") !== -1) return 1120;
