@@ -1,9 +1,11 @@
 /**
  * RotaPet - Transporte Executivo de Pets
- * Google Apps Script para Registro de Pedidos, Calculo de Orcamento e Notificacao Oracio
+ * Google Apps Script para Registro de Pedidos,
+ * Calculo de Orcamento e Notificacao Oracio
  * 
  * Calculo Logistico:
- * - Distancia Real: Integrado nativamente com a API do Google Maps (Maps.newDirectionFinder)
+ * - Distancia Real: Integrado nativamente com a API do Google Maps
+ *   (Maps.newDirectionFinder)
  *   Calcula rota rodoviaria real para qualquer cidade do Brasil
  * 
  * Custos Operacionais:
@@ -42,8 +44,9 @@ function setupPlanilha() {
   
   var sheets = ss.getSheets();
   for (var i = 0; i < sheets.length; i++) {
-    var nomeAba = sheets[i].getName();
-    if (nomeAba !== "Pedidos de Orçamento" && nomeAba !== "Prospecção de Clientes") {
+    var eAbaOrc = nomeAba === "Pedidos de Orçamento";
+    var eAbaPro = nomeAba === "Prospecção de Clientes";
+    if (!eAbaOrc && !eAbaPro) {
       sheets[i].setName("Prospecção de Clientes");
       break;
     }
@@ -145,13 +148,29 @@ function doPost(e) {
     }
 
     var agora = new Date();
-    var dataHora = Utilities.formatDate(agora, "America/Sao_Paulo", "dd/MM/yyyy HH:mm");
+    var tz = "America/Sao_Paulo";
+    var dataHora = Utilities.formatDate(agora, tz, "dd/MM/yyyy HH:mm");
     
     var nome = data.nome || "Cliente";
     var whatsapp = data.whatsapp || "";
     var perfil = data.perfil || "Tutor";
-    var origem = data.origem || "São Paulo - SP";
-    var destino = data.destino || "Destino";
+
+    var cidOrig = (data.cidadeOrigem || "").trim();
+    var ufOrig = (data.ufOrigem || "").trim().toUpperCase();
+    var cidDest = (data.cidadeDestino || "").trim();
+    var ufDest = (data.ufDestino || "").trim().toUpperCase();
+
+    var padraoOrig = "São Paulo - SP";
+    var padraoDest = "Rio de Janeiro - RJ";
+    var textoOrig = cidOrig ? (cidOrig + " - " + (ufOrig || "SP")) : padraoOrig;
+    var textoDest = cidDest ? (cidDest + " - " + (ufDest || "RJ")) : padraoDest;
+    var origem = data.origem || textoOrig;
+    var destino = data.destino || textoDest;
+
+    if (!ufDest && destino.indexOf(" - ") !== -1) {
+      ufDest = destino.split(" - ")[1].trim().toUpperCase();
+    }
+
     var raca = data.raca || "Pet";
     var porte = data.porte || "Médio";
     var qtdPets = parseInt(data.qtdPets || "1", 10) || 1;
@@ -160,7 +179,7 @@ function doPost(e) {
     var dataPrevista = data.dataPrevista || "A combinar";
 
     // Distancia real via Google Maps
-    var estimativaKm = calcularDistanciaReal(origem, destino);
+    var estimativaKm = calcularDistanciaReal(origem, destino, ufDest);
     
     // Dias de estrada
     var diasViagem = 1;
@@ -182,8 +201,10 @@ function doPost(e) {
       alimentacao + pernoiteHotel;
     var margemRoberto = diasViagem * qtdPets * 400.00;
 
-    var fatorModalidade = (modalidade.toLowerCase().indexOf("exclusivo") !== -1) ? 1.30 : 1.0;
-    var valorSugerido = (custoOperacionalTotal + margemRoberto) * fatorModalidade;
+    var ehExclusivo = modalidade.toLowerCase().indexOf("exclusivo") !== -1;
+    var fatorModalidade = ehExclusivo ? 1.30 : 1.0;
+    var totalBruto = custoOperacionalTotal + margemRoberto;
+    var valorSugerido = totalBruto * fatorModalidade;
     valorSugerido = Math.ceil(valorSugerido / 50) * 50;
 
     var valorFormatado = formatarMoeda(valorSugerido);
@@ -267,12 +288,14 @@ function doPost(e) {
       msgPronta: msgPronta
     });
 
-    var jsonOk = JSON.stringify({ status: "success", orcamento: valorSugerido });
+    var respOk = { status: "success", orcamento: valorSugerido };
+    var jsonOk = JSON.stringify(respOk);
     return ContentService.createTextOutput(jsonOk)
       .setMimeType(ContentService.MimeType.JSON);
 
   } catch (error) {
-    var jsonErr = JSON.stringify({ status: "error", message: error.toString() });
+    var respErr = { status: "error", message: error.toString() };
+    var jsonErr = JSON.stringify(respErr);
     return ContentService.createTextOutput(jsonErr)
       .setMimeType(ContentService.MimeType.JSON);
   }
@@ -351,7 +374,8 @@ function notificarOracio(dados) {
 
       if (numTelefone) {
         var txtZap = encodeURIComponent(dados.msgPronta);
-        var zapUrl = "https://api.whatsapp.com/send?phone=" + numTelefone + "&text=" + txtZap;
+        var zapBase = "https://api.whatsapp.com/send?phone=";
+        var zapUrl = zapBase + numTelefone + "&text=" + txtZap;
         payloadTelegram.reply_markup = {
           inline_keyboard: [
             [
@@ -364,7 +388,8 @@ function notificarOracio(dados) {
         };
       }
 
-      var telegramUrl = "https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendMessage";
+      var tgBase = "https://api.telegram.org/bot";
+      var telegramUrl = tgBase + TELEGRAM_BOT_TOKEN + "/sendMessage";
       UrlFetchApp.fetch(telegramUrl, {
         method: "post",
         contentType: "application/json",
@@ -384,7 +409,7 @@ function formatarMoeda(valor) {
   return "R$ " + partes.join(",");
 }
 
-function calcularDistanciaReal(origem, destino) {
+function calcularDistanciaReal(origem, destino, ufDestino) {
   try {
     var origemQuery = formatarEnderecoMaps(origem);
     var destinoQuery = formatarEnderecoMaps(destino);
@@ -402,6 +427,22 @@ function calcularDistanciaReal(origem, destino) {
         totalMetros += route.legs[i].distance.value;
       }
       var km = Math.round(totalMetros / 1000);
+
+      // Trava de seguranca de estado
+      if (ufDestino && route.legs && route.legs.length > 0) {
+        var ultLeg = route.legs[route.legs.length - 1];
+        var endAddr = (ultLeg.end_address || "").toUpperCase();
+        var ufAlvo = ufDestino.trim().toUpperCase();
+        var estAlvo = (nomeDoEstado(ufAlvo) || "").toUpperCase();
+
+        var temUf = endAddr.indexOf(ufAlvo) !== -1;
+        var temEst = endAddr.indexOf(estAlvo) !== -1;
+
+        if (!temUf && !temEst) {
+          return calcularDistanciaFallback(origem, ufAlvo);
+        }
+      }
+
       if (km > 0) return km;
     }
   } catch (e) {
@@ -443,16 +484,28 @@ function calcularDistanciaFallback(origem, destino) {
   var dest = removerAcentos(destino.toLowerCase());
 
   if (orig.indexOf("sao paulo") !== -1 || orig.indexOf("sp") !== -1) {
-    if (dest.indexOf("rio de janeiro") !== -1 || dest.indexOf("rj") !== -1) return 435;
-    if (dest.indexOf("curitiba") !== -1 || dest.indexOf("pr") !== -1) return 410;
-    if (dest.indexOf("belo horizonte") !== -1 || dest.indexOf("mg") !== -1) return 585;
-    if (dest.indexOf("campinas") !== -1 || dest.indexOf("ribeir") !== -1) return 240;
-    if (dest.indexOf("santos") !== -1 || dest.indexOf("litoral") !== -1) return 95;
-    if (dest.indexOf("teresina") !== -1 || dest.indexOf("pi") !== -1) return 2750;
-    if (dest.indexOf("brasilia") !== -1 || dest.indexOf("df") !== -1) return 1010;
-    if (dest.indexOf("florian") !== -1 || dest.indexOf("sc") !== -1) return 705;
-    if (dest.indexOf("porto alegre") !== -1 || dest.indexOf("rs") !== -1) return 1120;
-    if (dest.indexOf("salvador") !== -1 || dest.indexOf("ba") !== -1) return 1950;
+    var eRj = dest.indexOf("rio de janeiro") !== -1 ||
+      dest.indexOf("rj") !== -1;
+    if (eRj) return 435;
+    var ePr = dest.indexOf("curitiba") !== -1 || dest.indexOf("pr") !== -1;
+    if (ePr) return 410;
+    var eMg = dest.indexOf("belo horizonte") !== -1 ||
+      dest.indexOf("mg") !== -1;
+    if (eMg) return 585;
+    var eInt = dest.indexOf("campinas") !== -1 || dest.indexOf("ribeir") !== -1;
+    if (eInt) return 240;
+    var eLit = dest.indexOf("santos") !== -1 || dest.indexOf("litoral") !== -1;
+    if (eLit) return 95;
+    var ePi = dest.indexOf("teresina") !== -1 || dest.indexOf("pi") !== -1;
+    if (ePi) return 2750;
+    var eDf = dest.indexOf("brasilia") !== -1 || dest.indexOf("df") !== -1;
+    if (eDf) return 1010;
+    var eSc = dest.indexOf("florian") !== -1 || dest.indexOf("sc") !== -1;
+    if (eSc) return 705;
+    var eRs = dest.indexOf("porto alegre") !== -1 || dest.indexOf("rs") !== -1;
+    if (eRs) return 1120;
+    var eBa = dest.indexOf("salvador") !== -1 || dest.indexOf("ba") !== -1;
+    if (eBa) return 1950;
   }
   return 450;
 }
@@ -463,7 +516,8 @@ function removerAcentos(texto) {
 }
 
 function testarEnvioTelegram() {
-  var telegramUrl = "https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendMessage";
+  var tgUrl = "https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN;
+  var telegramUrl = tgUrl + "/sendMessage";
   var payload = {
     chat_id: TELEGRAM_CHAT_ID,
     text: "🚗 *Oracio conectado com sucesso à planilha RotaPet!*",
