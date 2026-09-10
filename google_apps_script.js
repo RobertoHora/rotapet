@@ -304,9 +304,7 @@ function notificarOracio(dados) {
         "📍 *Rota:* " + dados.origem + " ➔ " + dados.destino + " (" + dados.estimativaKm + " km)\n" +
         "🐾 *Pet:* " + dados.petDescricao + "\n" +
         "💉 *Vacinas/Doc:* " + dados.vacinasDoc + "\n" +
-        "💰 *Valor Calculado:* " + dados.valorFormatado + "\n\n" +
-        "💬 *Mensagem Pronta para o Cliente:*\n" +
-        "```\n" + dados.msgPronta + "\n```";
+        "💰 *Valor Calculado:* " + dados.valorFormatado;
 
       var numTelefone = (dados.whatsapp || "").replace(/\D/g, "");
       if (numTelefone.indexOf("0") === 0) {
