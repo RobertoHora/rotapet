@@ -25,10 +25,9 @@ var ORACIO_WEBHOOK_URL = "";
 // Se o webhook exigir token de autorizacao (Bearer Token):
 var ORACIO_AUTH_TOKEN = "";
 
-// 2. Telegram direto (Notificacao instantanea no Telegram do Roberto):
-// Se o Oracio usa Telegram ou se voce quiser receber direto no seu Telegram:
-var TELEGRAM_BOT_TOKEN = ""; // Ex: "123456789:ABCdefGHIjklMNO..."
-var TELEGRAM_CHAT_ID = "";   // Ex: "123456789"
+// 2. Telegram direto via Oracio (@Ooracio_bot -> Roberto):
+var TELEGRAM_BOT_TOKEN = "8826892591:AAFddcPYwUVkif1RCaLvy-68iLmqin7JNwc";
+var TELEGRAM_CHAT_ID = "1221813958";
 
 function setupPlanilha() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -296,7 +295,7 @@ function notificarOracio(dados) {
     }
   }
 
-  // 2. Notificacao Direta no Telegram (se configurado)
+  // 2. Notificacao Direta no Telegram via Oracio
   if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
     try {
       var textoTelegram = "🚗 *Nova Solicitação Taxi Dog*\n\n" +
@@ -309,15 +308,36 @@ function notificarOracio(dados) {
         "💬 *Mensagem Pronta para o Cliente:*\n" +
         "```\n" + dados.msgPronta + "\n```";
 
+      var numTelefone = (dados.whatsapp || "").replace(/\D/g, "");
+      if (numTelefone.length === 10 || numTelefone.length === 11) {
+        numTelefone = "55" + numTelefone;
+      }
+
+      var payloadTelegram = {
+        chat_id: TELEGRAM_CHAT_ID,
+        text: textoTelegram,
+        parse_mode: "Markdown"
+      };
+
+      if (numTelefone) {
+        var zapUrl = "https://api.whatsapp.com/send?phone=" + numTelefone + "&text=" + encodeURIComponent(dados.msgPronta);
+        payloadTelegram.reply_markup = {
+          inline_keyboard: [
+            [
+              {
+                text: "📲 Enviar Orçamento no WhatsApp",
+                url: zapUrl
+              }
+            ]
+          ]
+        };
+      }
+
       var telegramUrl = "https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendMessage";
       UrlFetchApp.fetch(telegramUrl, {
         method: "post",
         contentType: "application/json",
-        payload: JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
-          text: textoTelegram,
-          parse_mode: "Markdown"
-        }),
+        payload: JSON.stringify(payloadTelegram),
         muteHttpExceptions: true
       });
     } catch (errTelegram) {
