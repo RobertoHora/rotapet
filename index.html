@@ -1550,8 +1550,8 @@
             localStorage.setItem('rotapet_pedidos', JSON.stringify(saved));
           } catch(err) {}
 
-          // URL do Webhook do Google Apps Script (quando implantado)
-          const webhookUrl = window.ROTAPET_WEBHOOK_URL || '';
+          // URL do Webhook do Google Apps Script
+          const webhookUrl = 'https://script.google.com/macros/s/AKfycbzvxC_0wUz7IsLpmV1Hf8rgDcfwTomjlhNEykyapHbxLxKNlYvDXhk0mAMZcRvYyWhq/exec';
 
           const whatsappMessage = 'Olá! Solicitei um orçamento para o serviço Taxi Dog e aguardo o seu retorno o quanto antes.';
           const whatsappUrl = 'https://wa.me/5511992347759?text=' + encodeURIComponent(whatsappMessage);
