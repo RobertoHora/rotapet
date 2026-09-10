@@ -924,33 +924,113 @@
             <!-- ETAPA 1: TRAJETO -->
             <div class="step-panel space-y-6" data-step="1">
               <div>
-                <label for="origem" class="block text-xs uppercase tracking-wider font-semibold text-slate-300 mb-2">
+                <label for="cidadeOrigem" class="block text-xs uppercase tracking-wider font-semibold text-slate-300 mb-2">
                   Origem (Retirada)
                 </label>
-                <input 
-                  type="text" 
-                  id="origem" 
-                  name="origem" 
-                  placeholder="Ex: São Paulo - SP (Bairro ou Cidade)"
-                  required
-                  class="w-full bg-charcoal-900 border border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-gold-500/60 focus:ring-1 focus:ring-gold-500/60 transition-all"
-                >
-                <p class="text-rose-400 text-xs mt-1.5 hidden error-msg">Por favor, informe o local de origem.</p>
+                <div class="flex gap-2 sm:gap-3">
+                  <div class="flex-1">
+                    <input 
+                      type="text" 
+                      id="cidadeOrigem" 
+                      name="cidadeOrigem" 
+                      placeholder="Cidade ou Bairro"
+                      required
+                      class="w-full bg-charcoal-900 border border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-gold-500/60 focus:ring-1 focus:ring-gold-500/60 transition-all"
+                    >
+                    <p class="text-rose-400 text-xs mt-1.5 hidden error-msg">Informe a cidade de origem.</p>
+                  </div>
+                  <div class="w-24 sm:w-28 flex-shrink-0">
+                    <select 
+                      id="ufOrigem" 
+                      name="ufOrigem" 
+                      required
+                      class="w-full bg-charcoal-900 border border-white/10 rounded-xl px-3 py-3.5 text-sm text-slate-100 focus:outline-none focus:border-gold-500/60 focus:ring-1 focus:ring-gold-500/60 transition-all cursor-pointer font-medium"
+                    >
+                      <option value="SP" selected>SP</option>
+                      <option value="RJ">RJ</option>
+                      <option value="MG">MG</option>
+                      <option value="PR">PR</option>
+                      <option value="SC">SC</option>
+                      <option value="RS">RS</option>
+                      <option value="DF">DF</option>
+                      <option value="GO">GO</option>
+                      <option value="BA">BA</option>
+                      <option value="ES">ES</option>
+                      <option value="PE">PE</option>
+                      <option value="CE">CE</option>
+                      <option value="MT">MT</option>
+                      <option value="MS">MS</option>
+                      <option value="PA">PA</option>
+                      <option value="AM">AM</option>
+                      <option value="RN">RN</option>
+                      <option value="PB">PB</option>
+                      <option value="AL">AL</option>
+                      <option value="SE">SE</option>
+                      <option value="PI">PI</option>
+                      <option value="MA">MA</option>
+                      <option value="TO">TO</option>
+                      <option value="RO">RO</option>
+                      <option value="AC">AC</option>
+                      <option value="AP">AP</option>
+                      <option value="RR">RR</option>
+                    </select>
+                  </div>
+                </div>
               </div>
 
               <div>
-                <label for="destino" class="block text-xs uppercase tracking-wider font-semibold text-slate-300 mb-2">
+                <label for="cidadeDestino" class="block text-xs uppercase tracking-wider font-semibold text-slate-300 mb-2">
                   Destino (Entrega)
                 </label>
-                <input 
-                  type="text" 
-                  id="destino" 
-                  name="destino" 
-                  placeholder="Ex: Rio de Janeiro - RJ, Curitiba - PR, etc."
-                  required
-                  class="w-full bg-charcoal-900 border border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-gold-500/60 focus:ring-1 focus:ring-gold-500/60 transition-all"
-                >
-                <p class="text-rose-400 text-xs mt-1.5 hidden error-msg">Por favor, informe o local de destino.</p>
+                <div class="flex gap-2 sm:gap-3">
+                  <div class="flex-1">
+                    <input 
+                      type="text" 
+                      id="cidadeDestino" 
+                      name="cidadeDestino" 
+                      placeholder="Cidade ou Bairro"
+                      required
+                      class="w-full bg-charcoal-900 border border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-gold-500/60 focus:ring-1 focus:ring-gold-500/60 transition-all"
+                    >
+                    <p class="text-rose-400 text-xs mt-1.5 hidden error-msg">Informe a cidade de destino.</p>
+                  </div>
+                  <div class="w-24 sm:w-28 flex-shrink-0">
+                    <select 
+                      id="ufDestino" 
+                      name="ufDestino" 
+                      required
+                      class="w-full bg-charcoal-900 border border-white/10 rounded-xl px-3 py-3.5 text-sm text-slate-100 focus:outline-none focus:border-gold-500/60 focus:ring-1 focus:ring-gold-500/60 transition-all cursor-pointer font-medium"
+                    >
+                      <option value="RJ" selected>RJ</option>
+                      <option value="SP">SP</option>
+                      <option value="MG">MG</option>
+                      <option value="PR">PR</option>
+                      <option value="SC">SC</option>
+                      <option value="RS">RS</option>
+                      <option value="DF">DF</option>
+                      <option value="GO">GO</option>
+                      <option value="BA">BA</option>
+                      <option value="ES">ES</option>
+                      <option value="PE">PE</option>
+                      <option value="CE">CE</option>
+                      <option value="MT">MT</option>
+                      <option value="MS">MS</option>
+                      <option value="PA">PA</option>
+                      <option value="AM">AM</option>
+                      <option value="RN">RN</option>
+                      <option value="PB">PB</option>
+                      <option value="AL">AL</option>
+                      <option value="SE">SE</option>
+                      <option value="PI">PI</option>
+                      <option value="MA">MA</option>
+                      <option value="TO">TO</option>
+                      <option value="RO">RO</option>
+                      <option value="AC">AC</option>
+                      <option value="AP">AP</option>
+                      <option value="RR">RR</option>
+                    </select>
+                  </div>
+                </div>
               </div>
 
               <div class="pt-4 flex justify-end">
@@ -1561,9 +1641,21 @@
           btnFinalizar.disabled = true;
           document.getElementById('btnFinalizarText').textContent = 'Processando...';
 
+          const cidadeOrigem = (document.getElementById('cidadeOrigem').value || '').trim();
+          const ufOrigem = document.getElementById('ufOrigem').value || 'SP';
+          const origemCompleta = cidadeOrigem + ' - ' + ufOrigem;
+
+          const cidadeDestino = (document.getElementById('cidadeDestino').value || '').trim();
+          const ufDestino = document.getElementById('ufDestino').value || 'RJ';
+          const destinoCompleto = cidadeDestino + ' - ' + ufDestino;
+
           const payload = {
-            origem: document.getElementById('origem').value,
-            destino: document.getElementById('destino').value,
+            origem: origemCompleta,
+            cidadeOrigem: cidadeOrigem,
+            ufOrigem: ufOrigem,
+            destino: destinoCompleto,
+            cidadeDestino: cidadeDestino,
+            ufDestino: ufDestino,
             raca: document.getElementById('raca').value,
             porte: (form.querySelector('input[name="porte"]:checked') || {}).value || 'Pequeno',
             qtdPets: (form.querySelector('input[name="qtdPets"]:checked') || {}).value || '1',

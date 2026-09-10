@@ -2,7 +2,11 @@
  * RotaPet - Transporte Executivo de Pets
  * Google Apps Script para Registro de Pedidos e Calculo de Orcamento
  * 
- * Custos Operacionais Incluidos:
+ * Calculo Logistico:
+ * - Distancia Real: Integrado nativamente com a API do Google Maps (Maps.newDirectionFinder)
+ *   Calcula rota rodoviaria real para qualquer cidade do Brasil (origem e destino em qualquer estado)
+ * 
+ * Custos Operacionais:
  * - Combustivel: 13,5 km/L a R$ 5,95/L (ida e volta)
  * - Pedagios: R$ 14,50 / 100 km (ida e volta)
  * - Aluguel de Carro: R$ 150,00 / dia
@@ -114,7 +118,6 @@ function doPost(e) {
       'Mensagem Pronta para WhatsApp'
     ];
 
-    // Atualiza cabeçalhos automaticamente se houver novas colunas
     if (sheet.getLastColumn() < headers.length) {
       sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
       sheet.getRange(1, 1, 1, headers.length)
@@ -141,8 +144,8 @@ function doPost(e) {
     var modalidade = data.modalidade || 'Vaga Executiva';
     var dataPrevista = data.dataPrevista || 'A combinar';
 
-    // --- CÁLCULO LOGÍSTICO E FINANCEIRO (INTERNO) ---
-    var estimativaKm = calcularDistanciaAproximada(origem, destino);
+    // --- CÁLCULO LOGÍSTICO E FINANCEIRO VIA GOOGLE MAPS ---
+    var estimativaKm = calcularDistanciaReal(origem, destino);
     
     // Dias de estrada (até 650km = 1 dia; até 1350km = 2 dias; acima = 3+ dias)
     var diasViagem = 1;
@@ -172,7 +175,7 @@ function doPost(e) {
     // Margem líquida mínima do Roberto: R$ 300 por dia por cão
     var margemRoberto = diasViagem * qtdPets * 300.00;
 
-    // Se modalidade for 100% Exclusivo, ajusta taxa de exclusividade (30%)
+    // Se modalidade for 100% Exclusivo, taxa de exclusividade (+30%)
     var fatorModalidade = (modalidade.toLowerCase().indexOf('exclusivo') !== -1) ? 1.30 : 1.0;
     var valorSugerido = (custoOperacionalTotal + margemRoberto) * fatorModalidade;
 
@@ -185,7 +188,7 @@ function doPost(e) {
       'O valor para o transporte dedicado e climatizado fica em R$ ' + valorSugerido.toLocaleString('pt-BR') + 
       ' com paradas a cada 2h, vídeos ao vivo e acompanhamento por GPS. Podemos reservar para a data ' + dataPrevista + '?';
 
-    // Linha completa com todos os dados e custos discriminados
+    // Linha completa na planilha
     var newRow = [
       dataHora,
       nome,
@@ -226,7 +229,34 @@ function doGet(e) {
   return ContentService.createTextOutput('RotaPet Webhook ativo.');
 }
 
-function calcularDistanciaAproximada(origem, destino) {
+/**
+ * Calcula a distância rodoviária exata entre QUALQUER ponto do Brasil usando Google Maps
+ */
+function calcularDistanciaReal(origem, destino) {
+  try {
+    var directions = Maps.newDirectionFinder()
+      .setOrigin(origem + ', Brasil')
+      .setDestination(destino + ', Brasil')
+      .setMode(Maps.DirectionFinder.Mode.DRIVING)
+      .getDirections();
+
+    if (directions && directions.routes && directions.routes.length > 0) {
+      var route = directions.routes[0];
+      var totalMetros = 0;
+      for (var i = 0; i < route.legs.length; i++) {
+        totalMetros += route.legs[i].distance.value;
+      }
+      var km = Math.round(totalMetros / 1000);
+      if (km > 0) return km;
+    }
+  } catch (e) {
+    // Caso a API Maps encontre alguma oscilação, recorre ao fallback
+  }
+
+  return calcularDistanciaFallback(origem, destino);
+}
+
+function calcularDistanciaFallback(origem, destino) {
   var orig = origem.toLowerCase();
   var dest = destino.toLowerCase();
 
