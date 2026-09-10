@@ -2,21 +2,18 @@
  * RotaPet - Transporte Executivo de Pets
  * Google Apps Script para Registro de Pedidos e Calculo de Orcamento
  * 
- * Como instalar na sua planilha (1k_vEAFoM5YLC1KR2Xa9jFzmQD2L_bR6XoPp_lItWoNk):
- * 1. Abra sua planilha no Google Sheets
- * 2. Clique em Extensoes > Apps Script
- * 3. Apague qualquer codigo que estiver la, cole este codigo e clique em Salvar (icone do disquete)
- * 4. Clique em Executar na funcao 'configurarPlanilha' (apenas uma vez, para criar a aba e cabeçalhos)
- * 5. Clique em Implantar > Nova implantacao > Tipo: App da Web
- *    - Executar como: Eu
- *    - Quem tem acesso: Qualquer pessoa
- * 6. Copie o link da URL do App da Web gerado
+ * Custos Operacionais Incluidos:
+ * - Combustivel: 13,5 km/L a R$ 5,95/L (ida e volta)
+ * - Pedagios: R$ 14,50 / 100 km (ida e volta)
+ * - Aluguel de Carro: R$ 150,00 / dia
+ * - Alimentacao Estrada: R$ 70,00 / dia
+ * - Hotel Pernoite Pet-Friendly: R$ 180,00 / noite (viagens > 1 dia)
+ * - Margem Liquida Minima do Roberto: R$ 300,00 / dia por cao
  */
 
 function setupPlanilha() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   
-  // 1. Organiza abas: 'Pedidos de Orçamento' como primeira aba
   var sheetOrcamentos = ss.getSheetByName('Pedidos de Orçamento');
   if (!sheetOrcamentos) {
     sheetOrcamentos = ss.insertSheet('Pedidos de Orçamento', 0);
@@ -25,7 +22,6 @@ function setupPlanilha() {
     ss.moveActiveSheet(1);
   }
   
-  // Renomeia a aba de prospecção se for a padrão
   var sheets = ss.getSheets();
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].getName() !== 'Pedidos de Orçamento' && sheets[i].getName() !== 'Prospecção de Clientes') {
@@ -34,7 +30,6 @@ function setupPlanilha() {
     }
   }
 
-  // 2. Cabeçalhos da aba de Pedidos de Orçamento
   var headers = [
     'Data/Hora',
     'Nome do Cliente',
@@ -49,7 +44,11 @@ function setupPlanilha() {
     'Data Prevista',
     'Distância Estimada (km)',
     'Duração Estimada (dias)',
-    'Custo Operacional Estimado (R$)',
+    'Combustível + Pedágio (R$)',
+    'Aluguel Carro (R$)',
+    'Alimentação (R$)',
+    'Hotel / Pernoite (R$)',
+    'Custo Operacional Total (R$)',
     'Sua Margem Líquida Mínima (R$)',
     'Valor Total Sugerido (R$)',
     'Mensagem Pronta para WhatsApp'
@@ -89,6 +88,42 @@ function doPost(e) {
       sheet = ss.getSheetByName('Pedidos de Orçamento');
     }
 
+    var headers = [
+      'Data/Hora',
+      'Nome do Cliente',
+      'WhatsApp',
+      'Perfil',
+      'Origem (Coleta)',
+      'Destino (Entrega)',
+      'Espécie / Raça',
+      'Porte',
+      'Qtd Pets',
+      'Modalidade',
+      'Data Prevista',
+      'Distância Estimada (km)',
+      'Duração Estimada (dias)',
+      'Combustível + Pedágio (R$)',
+      'Aluguel Carro (R$)',
+      'Alimentação (R$)',
+      'Hotel / Pernoite (R$)',
+      'Custo Operacional Total (R$)',
+      'Sua Margem Líquida Mínima (R$)',
+      'Valor Total Sugerido (R$)',
+      'Mensagem Pronta para WhatsApp'
+    ];
+
+    // Atualiza cabeçalhos automaticamente se houver novas colunas
+    if (sheet.getLastColumn() < headers.length) {
+      sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+      sheet.getRange(1, 1, 1, headers.length)
+        .setBackground('#0d121c')
+        .setFontColor('#c59b4c')
+        .setFontWeight('bold')
+        .setFontFamily('Arial')
+        .setHorizontalAlignment('center');
+      sheet.setFrozenRows(1);
+    }
+
     var agora = new Date();
     var dataHora = Utilities.formatDate(agora, 'America/Sao_Paulo', 'dd/MM/yyyy HH:mm');
     
@@ -114,29 +149,40 @@ function doPost(e) {
       diasViagem = 2;
     }
 
-    // Custos operacionais (ida e volta): combustível (13.5 km/l a R$ 5.95) + pedágios médios
+    // 1. Combustível + Pedágio (ida e volta)
     var combustivel = (estimativaKm * 2 / 13.5) * 5.95;
     var pedagios = (estimativaKm * 2 / 100) * 14.50;
-    var pernoiteHotel = (diasViagem > 1) ? (diasViagem - 1) * 180.00 : 0;
-    var custoOperacionalTotal = combustivel + pedagios + pernoiteHotel;
+    var combustivelPedagio = combustivel + pedagios;
 
-    // Margem mínima do Roberto: R$ 300 por dia por cão
+    // 2. Aluguel do carro (R$ 150/dia)
+    var aluguelCarro = diasViagem * 150.00;
+
+    // 3. Alimentação na estrada (R$ 70/dia)
+    var alimentacao = diasViagem * 70.00;
+
+    // 4. Hotel / Pernoite Pet-Friendly (R$ 180/noite quando > 1 dia)
+    var pernoiteHotel = (diasViagem > 1) ? (diasViagem - 1) * 180.00 : 0;
+
+    // Custo Operacional Total
+    var custoOperacionalTotal = combustivelPedagio + aluguelCarro + alimentacao + pernoiteHotel;
+
+    // Margem líquida mínima do Roberto: R$ 300 por dia por cão
     var margemRoberto = diasViagem * qtdPets * 300.00;
 
-    // Se modalidade for 100% Exclusivo, ajusta taxa de exclusividade
+    // Se modalidade for 100% Exclusivo, ajusta taxa de exclusividade (30%)
     var fatorModalidade = (modalidade.toLowerCase().indexOf('exclusivo') !== -1) ? 1.30 : 1.0;
     var valorSugerido = (custoOperacionalTotal + margemRoberto) * fatorModalidade;
 
-    // Arredonda para número limpo
+    // Arredonda para múltiplo de 50 mais próximo
     valorSugerido = Math.ceil(valorSugerido / 50) * 50;
 
-    // Mensagem pronta para WhatsApp
+    // Mensagem pronta para copiar e colar no WhatsApp
     var msgPronta = 'Olá ' + nome + '! Aqui é o Roberto Hora do transporte executivo RotaPet. ' +
       'Recebi sua solicitação para o transporte de ' + origem + ' até ' + destino + ' (' + qtdPets + ' pet ' + raca + '). ' +
       'O valor para o transporte dedicado e climatizado fica em R$ ' + valorSugerido.toLocaleString('pt-BR') + 
-      ' com paradas humanizadas a cada 2h, vídeos ao vivo e acompanhamento por GPS. Podemos reservar para a data ' + dataPrevista + '?';
+      ' com paradas a cada 2h, vídeos ao vivo e acompanhamento por GPS. Podemos reservar para a data ' + dataPrevista + '?';
 
-    // Insere linha
+    // Linha completa com todos os custos discriminados
     var newRow = [
       dataHora,
       nome,
@@ -151,6 +197,10 @@ function doPost(e) {
       dataPrevista,
       estimativaKm,
       diasViagem,
+      'R$ ' + combustivelPedagio.toFixed(2).replace('.', ','),
+      'R$ ' + aluguelCarro.toFixed(2).replace('.', ','),
+      'R$ ' + alimentacao.toFixed(2).replace('.', ','),
+      'R$ ' + pernoiteHotel.toFixed(2).replace('.', ','),
       'R$ ' + custoOperacionalTotal.toFixed(2).replace('.', ','),
       'R$ ' + margemRoberto.toFixed(2).replace('.', ','),
       'R$ ' + valorSugerido.toFixed(2).replace('.', ','),
@@ -159,7 +209,7 @@ function doPost(e) {
 
     sheet.appendRow(newRow);
 
-    return ContentService.createTextOutput(JSON.stringify({ status: 'success', row: newRow }))
+    return ContentService.createTextOutput(JSON.stringify({ status: 'success' }))
       .setMimeType(ContentService.MimeType.JSON);
 
   } catch (error) {
@@ -169,14 +219,13 @@ function doPost(e) {
 }
 
 function doGet(e) {
-  return ContentService.createTextOutput('RotaPet Webhook ativo e pronto para receber orçamentos.');
+  return ContentService.createTextOutput('RotaPet Webhook ativo.');
 }
 
 function calcularDistanciaAproximada(origem, destino) {
   var orig = origem.toLowerCase();
   var dest = destino.toLowerCase();
 
-  // Rotas frequentes mapeadas
   if ((orig.indexOf('são paulo') !== -1 || orig.indexOf('sp') !== -1) && (dest.indexOf('rio de janeiro') !== -1 || dest.indexOf('rj') !== -1)) return 435;
   if ((orig.indexOf('são paulo') !== -1 || orig.indexOf('sp') !== -1) && (dest.indexOf('curitiba') !== -1 || dest.indexOf('pr') !== -1)) return 410;
   if ((orig.indexOf('são paulo') !== -1 || orig.indexOf('sp') !== -1) && (dest.indexOf('belo horizonte') !== -1 || dest.indexOf('mg') !== -1)) return 585;
@@ -188,6 +237,5 @@ function calcularDistanciaAproximada(origem, destino) {
   if ((orig.indexOf('são paulo') !== -1 || orig.indexOf('sp') !== -1) && (dest.indexOf('porto alegre') !== -1 || dest.indexOf('rs') !== -1)) return 1120;
   if ((orig.indexOf('são paulo') !== -1 || orig.indexOf('sp') !== -1) && (dest.indexOf('salvador') !== -1 || dest.indexOf('ba') !== -1)) return 1950;
   
-  // Padrão interestadual médio
   return 450;
 }
