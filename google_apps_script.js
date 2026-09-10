@@ -188,10 +188,11 @@ function doPost(e) {
     var petDescricao = qtdPets + (qtdPets > 1 ? " filhotes " : " filhote ") + (raca ? raca.replace(/^filhotes?\s+/i, "") : "pet");
 
     // Mensagem padrao de orcamento para envio ao cliente
-    var msgPronta = "Olá, " + nome + "! Aqui é o Roberto Hora, da RotaPet — transporte executivo de filhotes.\n" +
-      "Recebi sua solicitação: transporte de " + origem + " até " + destino + ", para " + petDescricao + ".\n" +
-      "O valor do transporte dedicado e climatizado é de " + valorFormatado + ", com paradas a cada 2h, vídeos ao vivo e acompanhamento por GPS.\n" +
-      "Vamos falar sobre a data de retirada?";
+    var parte1 = "Olá, " + nome + "! Aqui é o Roberto Hora, da RotaPet \u2014 transporte executivo de filhotes.";
+    var parte2 = "Recebi sua solicitação: transporte de " + origem + " até " + destino + ", para " + petDescricao + ".";
+    var parte3 = "O valor do transporte dedicado e climatizado é de " + valorFormatado + ", com paradas a cada 2h, vídeos ao vivo e acompanhamento por GPS.";
+    var parte4 = "Vamos falar sobre a data de retirada?";
+    var msgPronta = [parte1, parte2, parte3, parte4].join("\n");
 
     var newRow = [
       dataHora,
