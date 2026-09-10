@@ -44,6 +44,7 @@ function setupPlanilha() {
   
   var sheets = ss.getSheets();
   for (var i = 0; i < sheets.length; i++) {
+    var nomeAba = sheets[i].getName();
     var eAbaOrc = nomeAba === "Pedidos de Orçamento";
     var eAbaPro = nomeAba === "Prospecção de Clientes";
     if (!eAbaOrc && !eAbaPro) {
