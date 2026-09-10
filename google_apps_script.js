@@ -1,6 +1,6 @@
 /**
  * RotaPet - Transporte Executivo de Pets
- * Google Apps Script para Registro de Pedidos e Calculo de Orcamento
+ * Google Apps Script para Registro de Pedidos, Calculo de Orcamento e Notificacao Oracio
  * 
  * Calculo Logistico:
  * - Distancia Real: Integrado nativamente com a API do Google Maps (Maps.newDirectionFinder)
@@ -14,6 +14,21 @@
  * - Hotel Pernoite Pet-Friendly: R$ 180,00 / noite (viagens > 1 dia)
  * - Margem Liquida Minima do Roberto: R$ 300,00 / dia por cao
  */
+
+// =========================================================================
+// CONFIGURACOES DE NOTIFICACAO (ORACIO / WEBHOOK / TELEGRAM)
+// =========================================================================
+// 1. Webhook HTTP do Oracio (ou n8n, Make, endpoint customizado):
+// Insira a URL do webhook do Oracio caso utilize webhook HTTP.
+var ORACIO_WEBHOOK_URL = ""; 
+
+// Se o webhook exigir token de autorizacao (Bearer Token):
+var ORACIO_AUTH_TOKEN = "";
+
+// 2. Telegram direto (Notificacao instantanea no Telegram do Roberto):
+// Se o Oracio usa Telegram ou se voce quiser receber direto no seu Telegram:
+var TELEGRAM_BOT_TOKEN = ""; // Ex: "123456789:ABCdefGHIjklMNO..."
+var TELEGRAM_CHAT_ID = "";   // Ex: "123456789"
 
 function setupPlanilha() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -170,10 +185,14 @@ function doPost(e) {
     var valorSugerido = (custoOperacionalTotal + margemRoberto) * fatorModalidade;
     valorSugerido = Math.ceil(valorSugerido / 50) * 50;
 
-    var msgPronta = "Olá " + nome + "! Aqui é o Roberto Hora do transporte executivo RotaPet. " +
-      "Recebi sua solicitação para o transporte de " + origem + " até " + destino + " (" + qtdPets + " pet " + raca + "). " +
-      "O valor para o transporte dedicado e climatizado fica em R$ " + valorSugerido.toLocaleString("pt-BR") + 
-      " com paradas a cada 2h, vídeos ao vivo e acompanhamento por GPS. Podemos reservar para a data " + dataPrevista + "?";
+    var valorFormatado = formatarMoeda(valorSugerido);
+    var petDescricao = qtdPets + (qtdPets > 1 ? " filhotes " : " filhote ") + (raca ? raca.replace(/^filhotes?\s+/i, "") : "pet");
+
+    // Mensagem padrao de orcamento para envio ao cliente
+    var msgPronta = "Olá, " + nome + "! Aqui é o Roberto Hora, da RotaPet — transporte executivo de filhotes.\n" +
+      "Recebi sua solicitação: transporte de " + origem + " até " + destino + ", para " + petDescricao + ".\n" +
+      "O valor do transporte dedicado e climatizado é de " + valorFormatado + ", com paradas a cada 2h, vídeos ao vivo e acompanhamento por GPS.\n" +
+      "Vamos falar sobre a data de retirada?";
 
     var newRow = [
       dataHora,
@@ -190,19 +209,40 @@ function doPost(e) {
       dataPrevista,
       estimativaKm,
       diasViagem,
-      "R$ " + combustivelPedagio.toFixed(2).replace(".", ","),
-      "R$ " + aluguelCarro.toFixed(2).replace(".", ","),
-      "R$ " + alimentacao.toFixed(2).replace(".", ","),
-      "R$ " + pernoiteHotel.toFixed(2).replace(".", ","),
-      "R$ " + custoOperacionalTotal.toFixed(2).replace(".", ","),
-      "R$ " + margemRoberto.toFixed(2).replace(".", ","),
-      "R$ " + valorSugerido.toFixed(2).replace(".", ","),
+      formatarMoeda(combustivelPedagio),
+      formatarMoeda(aluguelCarro),
+      formatarMoeda(alimentacao),
+      formatarMoeda(pernoiteHotel),
+      formatarMoeda(custoOperacionalTotal),
+      formatarMoeda(margemRoberto),
+      valorFormatado,
       msgPronta
     ];
 
     sheet.appendRow(newRow);
 
-    return ContentService.createTextOutput(JSON.stringify({ status: "success" }))
+    // Notificacao Oracio / Telegram / Webhook
+    notificarOracio({
+      dataHora: dataHora,
+      nome: nome,
+      whatsapp: whatsapp,
+      perfil: perfil,
+      origem: origem,
+      destino: destino,
+      raca: raca,
+      petDescricao: petDescricao,
+      porte: porte,
+      qtdPets: qtdPets,
+      vacinasDoc: vacinasDoc,
+      modalidade: modalidade,
+      dataPrevista: dataPrevista,
+      estimativaKm: estimativaKm,
+      diasViagem: diasViagem,
+      valorFormatado: valorFormatado,
+      msgPronta: msgPronta
+    });
+
+    return ContentService.createTextOutput(JSON.stringify({ status: "success", orcamento: valorSugerido }))
       .setMimeType(ContentService.MimeType.JSON);
 
   } catch (error) {
@@ -213,6 +253,84 @@ function doPost(e) {
 
 function doGet(e) {
   return ContentService.createTextOutput("RotaPet Webhook ativo.");
+}
+
+function notificarOracio(dados) {
+  // 1. Webhook HTTP do Oracio
+  if (ORACIO_WEBHOOK_URL && ORACIO_WEBHOOK_URL.indexOf("http") === 0) {
+    try {
+      var headers = {
+        "Content-Type": "application/json"
+      };
+      if (ORACIO_AUTH_TOKEN) {
+        headers["Authorization"] = "Bearer " + ORACIO_AUTH_TOKEN;
+      }
+
+      var payload = {
+        titulo: "Nova Solicitação Taxi Dog",
+        dataHora: dados.dataHora,
+        cliente: dados.nome,
+        whatsapp: dados.whatsapp,
+        perfil: dados.perfil,
+        origem: dados.origem,
+        destino: dados.destino,
+        pet: dados.petDescricao,
+        porte: dados.porte,
+        vacinasDoc: dados.vacinasDoc,
+        modalidade: dados.modalidade,
+        dataPrevista: dados.dataPrevista,
+        distanciaKm: dados.estimativaKm,
+        diasEstimados: dados.diasViagem,
+        valor: dados.valorFormatado,
+        mensagem: dados.msgPronta
+      };
+
+      UrlFetchApp.fetch(ORACIO_WEBHOOK_URL, {
+        method: "post",
+        headers: headers,
+        payload: JSON.stringify(payload),
+        muteHttpExceptions: true
+      });
+    } catch (errWebhook) {
+      Logger.log("Erro ao enviar webhook Oracio: " + errWebhook.toString());
+    }
+  }
+
+  // 2. Notificacao Direta no Telegram (se configurado)
+  if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
+    try {
+      var textoTelegram = "🚗 *Nova Solicitação Taxi Dog*\n\n" +
+        "👤 *Cliente:* " + dados.nome + "\n" +
+        "📱 *WhatsApp:* " + dados.whatsapp + "\n" +
+        "📍 *Rota:* " + dados.origem + " ➔ " + dados.destino + " (" + dados.estimativaKm + " km)\n" +
+        "🐾 *Pet:* " + dados.petDescricao + "\n" +
+        "💉 *Vacinas/Doc:* " + dados.vacinasDoc + "\n" +
+        "💰 *Valor Calculado:* " + dados.valorFormatado + "\n\n" +
+        "💬 *Mensagem Pronta para o Cliente:*\n" +
+        "```\n" + dados.msgPronta + "\n```";
+
+      var telegramUrl = "https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendMessage";
+      UrlFetchApp.fetch(telegramUrl, {
+        method: "post",
+        contentType: "application/json",
+        payload: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: textoTelegram,
+          parse_mode: "Markdown"
+        }),
+        muteHttpExceptions: true
+      });
+    } catch (errTelegram) {
+      Logger.log("Erro ao enviar Telegram: " + errTelegram.toString());
+    }
+  }
+}
+
+function formatarMoeda(valor) {
+  if (typeof valor !== "number") valor = Number(valor) || 0;
+  var partes = valor.toFixed(2).split(".");
+  partes[0] = partes[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  return "R$ " + partes.join(",");
 }
 
 function calcularDistanciaReal(origem, destino) {
