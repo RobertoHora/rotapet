@@ -94,10 +94,11 @@
       </a>
 
       <!-- Desktop Navigation Links -->
-      <nav class="hidden lg:flex items-center gap-8 text-xs uppercase tracking-wider font-medium text-slate-300">
+      <nav class="hidden lg:flex items-center gap-7 text-xs uppercase tracking-wider font-medium text-slate-300">
         <a href="#diferencial" class="hover:text-gold-400 transition-colors">Diferencial</a>
         <a href="#sobre" class="hover:text-gold-400 transition-colors">Quem Sou Eu</a>
         <a href="#contratacao" class="hover:text-gold-400 transition-colors">Como Funciona</a>
+        <a href="#cotacao" class="hover:text-gold-400 transition-colors text-gold-400 font-semibold">Solicitar Orçamento</a>
         <a href="#faq" class="hover:text-gold-400 transition-colors">FAQ</a>
       </nav>
 
@@ -871,6 +872,356 @@
     </section>
 
     <!-- ================================================================= -->
+    <!-- FORMULÁRIO DE COTAÇÃO EM ETAPAS (Dark Charcoal)                   -->
+    <!-- ================================================================= -->
+    <section id="cotacao" class="py-20 sm:py-28 px-4 sm:px-6 bg-charcoal-900 border-b border-white/5 relative overflow-hidden">
+      <div class="max-w-3xl mx-auto relative">
+        
+        <div class="text-center max-w-xl mx-auto mb-12">
+          <div class="text-xs uppercase tracking-widest font-semibold text-gold-400 mb-3">
+            Cotação Online
+          </div>
+          <h2 class="font-heading text-2xl sm:text-4xl font-normal text-white leading-tight mb-3">
+            Solicitar Orçamento
+          </h2>
+          <p class="text-slate-400 text-sm font-light">
+            Informe os dados do transporte para receber a disponibilidade e proposta personalizada.
+          </p>
+        </div>
+
+        <!-- Card do Formulário Multi-Step -->
+        <div class="bg-charcoal-850/90 border border-white/10 rounded-2xl p-6 sm:p-10 shadow-2xl backdrop-blur-sm">
+          
+          <!-- Indicador de Etapas -->
+          <div class="flex items-center justify-between mb-8 pb-6 border-b border-white/5">
+            <div class="flex items-center gap-2.5 step-indicator" data-indicator="1">
+              <span class="w-7 h-7 rounded-full bg-gold-500 text-charcoal-950 font-bold text-xs flex items-center justify-center font-sans">1</span>
+              <span class="text-xs font-medium text-slate-200 hidden sm:inline">Trajeto</span>
+            </div>
+            <div class="h-0.5 flex-1 mx-2 sm:mx-4 bg-white/10 step-line" data-line="1"></div>
+
+            <div class="flex items-center gap-2.5 step-indicator" data-indicator="2">
+              <span class="w-7 h-7 rounded-full bg-charcoal-800 text-slate-400 font-bold text-xs flex items-center justify-center font-sans">2</span>
+              <span class="text-xs font-medium text-slate-400 hidden sm:inline">Pet</span>
+            </div>
+            <div class="h-0.5 flex-1 mx-2 sm:mx-4 bg-white/10 step-line" data-line="2"></div>
+
+            <div class="flex items-center gap-2.5 step-indicator" data-indicator="3">
+              <span class="w-7 h-7 rounded-full bg-charcoal-800 text-slate-400 font-bold text-xs flex items-center justify-center font-sans">3</span>
+              <span class="text-xs font-medium text-slate-400 hidden sm:inline">Viagem</span>
+            </div>
+            <div class="h-0.5 flex-1 mx-2 sm:mx-4 bg-white/10 step-line" data-line="3"></div>
+
+            <div class="flex items-center gap-2.5 step-indicator" data-indicator="4">
+              <span class="w-7 h-7 rounded-full bg-charcoal-800 text-slate-400 font-bold text-xs flex items-center justify-center font-sans">4</span>
+              <span class="text-xs font-medium text-slate-400 hidden sm:inline">Contato</span>
+            </div>
+          </div>
+
+          <!-- Formulário -->
+          <form id="quoteForm" novalidate>
+            
+            <!-- ETAPA 1: TRAJETO -->
+            <div class="step-panel space-y-6" data-step="1">
+              <div>
+                <label for="origem" class="block text-xs uppercase tracking-wider font-semibold text-slate-300 mb-2">
+                  Origem (Retirada)
+                </label>
+                <input 
+                  type="text" 
+                  id="origem" 
+                  name="origem" 
+                  placeholder="Ex: São Paulo - SP (Bairro ou Cidade)"
+                  required
+                  class="w-full bg-charcoal-900 border border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-gold-500/60 focus:ring-1 focus:ring-gold-500/60 transition-all"
+                >
+                <p class="text-rose-400 text-xs mt-1.5 hidden error-msg">Por favor, informe o local de origem.</p>
+              </div>
+
+              <div>
+                <label for="destino" class="block text-xs uppercase tracking-wider font-semibold text-slate-300 mb-2">
+                  Destino (Entrega)
+                </label>
+                <input 
+                  type="text" 
+                  id="destino" 
+                  name="destino" 
+                  placeholder="Ex: Rio de Janeiro - RJ, Curitiba - PR, etc."
+                  required
+                  class="w-full bg-charcoal-900 border border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-gold-500/60 focus:ring-1 focus:ring-gold-500/60 transition-all"
+                >
+                <p class="text-rose-400 text-xs mt-1.5 hidden error-msg">Por favor, informe o local de destino.</p>
+              </div>
+
+              <div class="pt-4 flex justify-end">
+                <button 
+                  type="button" 
+                  class="btn-next px-7 py-3.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-charcoal-950 text-sm font-semibold tracking-wide transition-all shadow-md active:scale-95 flex items-center gap-2"
+                >
+                  <span>Avançar</span>
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- ETAPA 2: O PET -->
+            <div class="step-panel space-y-6 hidden" data-step="2">
+              <div>
+                <label for="raca" class="block text-xs uppercase tracking-wider font-semibold text-slate-300 mb-2">
+                  Espécie / Raça do Animal
+                </label>
+                <input 
+                  type="text" 
+                  id="raca" 
+                  name="raca" 
+                  placeholder="Ex: Spitz Alemão, Bulldog Francês, Maltês"
+                  required
+                  class="w-full bg-charcoal-900 border border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-gold-500/60 focus:ring-1 focus:ring-gold-500/60 transition-all"
+                >
+                <p class="text-rose-400 text-xs mt-1.5 hidden error-msg">Informe a raça ou espécie do pet.</p>
+              </div>
+
+              <div>
+                <label class="block text-xs uppercase tracking-wider font-semibold text-slate-300 mb-2">
+                  Porte do Animal
+                </label>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <label class="cursor-pointer">
+                    <input type="radio" name="porte" value="Pequeno (até 10kg)" checked class="peer sr-only">
+                    <div class="p-3.5 rounded-xl bg-charcoal-900 border border-white/10 text-center peer-checked:border-gold-500 peer-checked:bg-gold-500/10 transition-all">
+                      <div class="text-sm font-medium text-slate-200">Pequeno</div>
+                      <div class="text-[11px] text-slate-400">Até 10 kg</div>
+                    </div>
+                  </label>
+
+                  <label class="cursor-pointer">
+                    <input type="radio" name="porte" value="Médio (10 a 25kg)" class="peer sr-only">
+                    <div class="p-3.5 rounded-xl bg-charcoal-900 border border-white/10 text-center peer-checked:border-gold-500 peer-checked:bg-gold-500/10 transition-all">
+                      <div class="text-sm font-medium text-slate-200">Médio</div>
+                      <div class="text-[11px] text-slate-400">10 a 25 kg</div>
+                    </div>
+                  </label>
+
+                  <label class="cursor-pointer">
+                    <input type="radio" name="porte" value="Grande (acima de 25kg)" class="peer sr-only">
+                    <div class="p-3.5 rounded-xl bg-charcoal-900 border border-white/10 text-center peer-checked:border-gold-500 peer-checked:bg-gold-500/10 transition-all">
+                      <div class="text-sm font-medium text-slate-200">Grande</div>
+                      <div class="text-[11px] text-slate-400">Acima de 25 kg</div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs uppercase tracking-wider font-semibold text-slate-300 mb-2">
+                  Quantidade de Pets
+                </label>
+                <div class="grid grid-cols-3 gap-3 max-w-xs">
+                  <label class="cursor-pointer">
+                    <input type="radio" name="qtdPets" value="1" checked class="peer sr-only">
+                    <div class="p-3 rounded-xl bg-charcoal-900 border border-white/10 text-center peer-checked:border-gold-500 peer-checked:bg-gold-500/10 transition-all font-semibold text-slate-200">
+                      1 Pet
+                    </div>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input type="radio" name="qtdPets" value="2" class="peer sr-only">
+                    <div class="p-3 rounded-xl bg-charcoal-900 border border-white/10 text-center peer-checked:border-gold-500 peer-checked:bg-gold-500/10 transition-all font-semibold text-slate-200">
+                      2 Pets
+                    </div>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input type="radio" name="qtdPets" value="3" class="peer sr-only">
+                    <div class="p-3 rounded-xl bg-charcoal-900 border border-white/10 text-center peer-checked:border-gold-500 peer-checked:bg-gold-500/10 transition-all font-semibold text-slate-200">
+                      3 Pets
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="pt-4 flex items-center justify-between">
+                <button 
+                  type="button" 
+                  class="btn-prev px-5 py-3 rounded-xl border border-slate-700 text-slate-300 hover:text-white hover:border-slate-500 text-sm font-medium transition-all"
+                >
+                  Voltar
+                </button>
+                <button 
+                  type="button" 
+                  class="btn-next px-7 py-3.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-charcoal-950 text-sm font-semibold tracking-wide transition-all shadow-md active:scale-95 flex items-center gap-2"
+                >
+                  <span>Avançar</span>
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- ETAPA 3: VIAGEM -->
+            <div class="step-panel space-y-6 hidden" data-step="3">
+              <div>
+                <label class="block text-xs uppercase tracking-wider font-semibold text-slate-300 mb-2">
+                  Modalidade do Transporte
+                </label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <label class="cursor-pointer">
+                    <input type="radio" name="modalidade" value="Vaga Executiva" checked class="peer sr-only">
+                    <div class="p-4 rounded-xl bg-charcoal-900 border border-white/10 peer-checked:border-gold-500 peer-checked:bg-gold-500/10 transition-all h-full">
+                      <div class="text-sm font-bold text-slate-200">Vaga Executiva</div>
+                      <div class="text-xs text-slate-400 mt-1 font-light">Máximo 2 a 3 pets no veículo, caixas individuais.</div>
+                    </div>
+                  </label>
+
+                  <label class="cursor-pointer">
+                    <input type="radio" name="modalidade" value="Carro 100% Exclusivo" class="peer sr-only">
+                    <div class="p-4 rounded-xl bg-charcoal-900 border border-white/10 peer-checked:border-gold-500 peer-checked:bg-gold-500/10 transition-all h-full">
+                      <div class="text-sm font-bold text-slate-200">100% Exclusivo VIP</div>
+                      <div class="text-xs text-slate-400 mt-1 font-light">Apenas o seu pet no carro, saída no seu horário.</div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <label for="dataPrevista" class="block text-xs uppercase tracking-wider font-semibold text-slate-300 mb-2">
+                  Previsão de Data para a Viagem
+                </label>
+                <input 
+                  type="text" 
+                  id="dataPrevista" 
+                  name="dataPrevista" 
+                  placeholder="Ex: Próxima semana ou DD/MM/AAAA"
+                  required
+                  class="w-full bg-charcoal-900 border border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-gold-500/60 focus:ring-1 focus:ring-gold-500/60 transition-all"
+                >
+                <p class="text-rose-400 text-xs mt-1.5 hidden error-msg">Informe a data aproximada desejada.</p>
+              </div>
+
+              <div class="pt-4 flex items-center justify-between">
+                <button 
+                  type="button" 
+                  class="btn-prev px-5 py-3 rounded-xl border border-slate-700 text-slate-300 hover:text-white hover:border-slate-500 text-sm font-medium transition-all"
+                >
+                  Voltar
+                </button>
+                <button 
+                  type="button" 
+                  class="btn-next px-7 py-3.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-charcoal-950 text-sm font-semibold tracking-wide transition-all shadow-md active:scale-95 flex items-center gap-2"
+                >
+                  <span>Avançar</span>
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- ETAPA 4: CONTATO -->
+            <div class="step-panel space-y-6 hidden" data-step="4">
+              <div>
+                <label for="nome" class="block text-xs uppercase tracking-wider font-semibold text-slate-300 mb-2">
+                  Seu Nome Completo
+                </label>
+                <input 
+                  type="text" 
+                  id="nome" 
+                  name="nome" 
+                  placeholder="Nome e sobrenome"
+                  required
+                  class="w-full bg-charcoal-900 border border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-gold-500/60 focus:ring-1 focus:ring-gold-500/60 transition-all"
+                >
+                <p class="text-rose-400 text-xs mt-1.5 hidden error-msg">Informe o seu nome.</p>
+              </div>
+
+              <div>
+                <label for="whatsappCliente" class="block text-xs uppercase tracking-wider font-semibold text-slate-300 mb-2">
+                  WhatsApp com DDD
+                </label>
+                <input 
+                  type="tel" 
+                  id="whatsappCliente" 
+                  name="whatsapp" 
+                  placeholder="(11) 99999-9999"
+                  required
+                  class="w-full bg-charcoal-900 border border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-gold-500/60 focus:ring-1 focus:ring-gold-500/60 transition-all"
+                >
+                <p class="text-rose-400 text-xs mt-1.5 hidden error-msg">Informe um WhatsApp válido com DDD.</p>
+              </div>
+
+              <div>
+                <label class="block text-xs uppercase tracking-wider font-semibold text-slate-300 mb-2">
+                  Você é:
+                </label>
+                <div class="grid grid-cols-2 gap-3">
+                  <label class="cursor-pointer">
+                    <input type="radio" name="perfil" value="Tutor Particular" checked class="peer sr-only">
+                    <div class="p-3 rounded-xl bg-charcoal-900 border border-white/10 text-center peer-checked:border-gold-500 peer-checked:bg-gold-500/10 transition-all font-medium text-xs text-slate-200">
+                      Tutor / Família
+                    </div>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input type="radio" name="perfil" value="Canil / Criador" class="peer sr-only">
+                    <div class="p-3 rounded-xl bg-charcoal-900 border border-white/10 text-center peer-checked:border-gold-500 peer-checked:bg-gold-500/10 transition-all font-medium text-xs text-slate-200">
+                      Canil / Criador
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="pt-4 flex items-center justify-between">
+                <button 
+                  type="button" 
+                  class="btn-prev px-5 py-3 rounded-xl border border-slate-700 text-slate-300 hover:text-white hover:border-slate-500 text-sm font-medium transition-all"
+                >
+                  Voltar
+                </button>
+                <button 
+                  type="button" 
+                  id="btnFinalizar"
+                  class="px-8 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold tracking-wide transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2"
+                >
+                  <span id="btnFinalizarText">Finalizar</span>
+                  <svg id="btnFinalizarIcon" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- TELA DE SUCESSO -->
+            <div id="stepSuccess" class="hidden text-center py-8 space-y-4">
+              <div class="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 flex items-center justify-center mx-auto mb-2">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-heading text-white">Solicitação Registrada</h3>
+              <p class="text-slate-300 text-sm max-w-md mx-auto font-light leading-relaxed">
+                Aguarde um instante enquanto abrimos seu WhatsApp para confirmação direta com o Roberto Hora.
+              </p>
+              <div class="pt-3">
+                <a 
+                  id="linkWhatsappManual"
+                  href="https://wa.me/5511992347759?text=Ol%C3%A1!%20Solicitei%20um%20or%C3%A7amento%20para%20o%20servi%C3%A7o%20Taxi%20Dog%20e%20aguardo%20o%20seu%20retorno%20o%20quanto%20antes." 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold uppercase tracking-wider transition-all"
+                >
+                  <span>Abrir WhatsApp Manualmente</span>
+                </a>
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
     <!-- 9. PERGUNTAS FREQUENTES (Dark Charcoal - SEÇÃO NOVA)              -->
     <!-- ================================================================= -->
     <section id="faq" class="py-20 sm:py-28 px-4 sm:px-6 bg-charcoal-900 border-b border-white/5">
@@ -1057,5 +1408,183 @@
     </a>
   </aside>
 
+  <!-- Scripts do Formulário Multi-Step & Integração WhatsApp -->
+  <script>
+    (function() {
+      const form = document.getElementById('quoteForm');
+      if (!form) return;
+
+      let currentStep = 1;
+      const totalSteps = 4;
+
+      const panels = form.querySelectorAll('.step-panel');
+      const indicators = document.querySelectorAll('.step-indicator');
+      const lines = document.querySelectorAll('.step-line');
+      const btnFinalizar = document.getElementById('btnFinalizar');
+      const stepSuccess = document.getElementById('stepSuccess');
+
+      // Máscara de WhatsApp
+      const inputWhatsapp = document.getElementById('whatsappCliente');
+      if (inputWhatsapp) {
+        inputWhatsapp.addEventListener('input', function(e) {
+          let v = e.target.value.replace(/\D/g, '');
+          if (v.length > 11) v = v.slice(0, 11);
+          if (v.length > 6) {
+            v = '(' + v.slice(0, 2) + ') ' + v.slice(2, 7) + '-' + v.slice(7);
+          } else if (v.length > 2) {
+            v = '(' + v.slice(0, 2) + ') ' + v.slice(2);
+          } else if (v.length > 0) {
+            v = '(' + v;
+          }
+          e.target.value = v;
+        });
+      }
+
+      function updateStep(step) {
+        currentStep = step;
+        panels.forEach(p => {
+          if (parseInt(p.getAttribute('data-step'), 10) === currentStep) {
+            p.classList.remove('hidden');
+          } else {
+            p.classList.add('hidden');
+          }
+        });
+
+        // Atualiza indicadores
+        indicators.forEach(ind => {
+          const s = parseInt(ind.getAttribute('data-indicator'), 10);
+          const badge = ind.querySelector('span:first-child');
+          const label = ind.querySelector('span:last-child');
+          if (s < currentStep) {
+            badge.className = 'w-7 h-7 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center font-sans';
+            badge.innerHTML = '<svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>';
+            if (label) label.className = 'text-xs font-medium text-slate-300 hidden sm:inline';
+          } else if (s === currentStep) {
+            badge.className = 'w-7 h-7 rounded-full bg-gold-500 text-charcoal-950 font-bold text-xs flex items-center justify-center font-sans';
+            badge.textContent = s;
+            if (label) label.className = 'text-xs font-semibold text-white hidden sm:inline';
+          } else {
+            badge.className = 'w-7 h-7 rounded-full bg-charcoal-800 text-slate-400 font-bold text-xs flex items-center justify-center font-sans';
+            badge.textContent = s;
+            if (label) label.className = 'text-xs font-medium text-slate-400 hidden sm:inline';
+          }
+        });
+
+        lines.forEach(line => {
+          const l = parseInt(line.getAttribute('data-line'), 10);
+          if (l < currentStep) {
+            line.className = 'h-0.5 flex-1 mx-2 sm:mx-4 bg-emerald-600 transition-colors';
+          } else {
+            line.className = 'h-0.5 flex-1 mx-2 sm:mx-4 bg-white/10 transition-colors';
+          }
+        });
+      }
+
+      function validateCurrentStep() {
+        const currentPanel = form.querySelector('.step-panel[data-step="' + currentStep + '"]');
+        if (!currentPanel) return true;
+        const inputs = currentPanel.querySelectorAll('input[required]');
+        let valid = true;
+
+        inputs.forEach(input => {
+          const errorMsg = input.parentElement.querySelector('.error-msg');
+          if (!input.value.trim()) {
+            valid = false;
+            input.classList.add('border-rose-500');
+            if (errorMsg) errorMsg.classList.remove('hidden');
+          } else {
+            input.classList.remove('border-rose-500');
+            if (errorMsg) errorMsg.classList.add('hidden');
+          }
+        });
+
+        return valid;
+      }
+
+      // Botões Próximo
+      form.querySelectorAll('.btn-next').forEach(btn => {
+        btn.addEventListener('click', function() {
+          if (validateCurrentStep()) {
+            if (currentStep < totalSteps) {
+              updateStep(currentStep + 1);
+            }
+          }
+        });
+      });
+
+      // Botões Voltar
+      form.querySelectorAll('.btn-prev').forEach(btn => {
+        btn.addEventListener('click', function() {
+          if (currentStep > 1) {
+            updateStep(currentStep - 1);
+          }
+        });
+      });
+
+      // Envio Final
+      if (btnFinalizar) {
+        btnFinalizar.addEventListener('click', function(e) {
+          e.preventDefault();
+          if (!validateCurrentStep()) return;
+
+          btnFinalizar.disabled = true;
+          document.getElementById('btnFinalizarText').textContent = 'Processando...';
+
+          const payload = {
+            origem: document.getElementById('origem').value,
+            destino: document.getElementById('destino').value,
+            raca: document.getElementById('raca').value,
+            porte: (form.querySelector('input[name="porte"]:checked') || {}).value || 'Pequeno',
+            qtdPets: (form.querySelector('input[name="qtdPets"]:checked') || {}).value || '1',
+            modalidade: (form.querySelector('input[name="modalidade"]:checked') || {}).value || 'Vaga Executiva',
+            dataPrevista: document.getElementById('dataPrevista').value,
+            nome: document.getElementById('nome').value,
+            whatsapp: document.getElementById('whatsappCliente').value,
+            perfil: (form.querySelector('input[name="perfil"]:checked') || {}).value || 'Tutor'
+          };
+
+          // Salva backup local
+          try {
+            const saved = JSON.parse(localStorage.getItem('rotapet_pedidos') || '[]');
+            saved.push({ ...payload, dataHora: new Date().toISOString() });
+            localStorage.setItem('rotapet_pedidos', JSON.stringify(saved));
+          } catch(err) {}
+
+          // URL do Webhook do Google Apps Script (quando implantado)
+          const webhookUrl = window.ROTAPET_WEBHOOK_URL || '';
+
+          const whatsappMessage = 'Olá! Solicitei um orçamento para o serviço Taxi Dog e aguardo o seu retorno o quanto antes.';
+          const whatsappUrl = 'https://wa.me/5511992347759?text=' + encodeURIComponent(whatsappMessage);
+
+          function proceedToWhatsApp() {
+            panels.forEach(p => p.classList.add('hidden'));
+            indicators.forEach(i => i.classList.add('opacity-40'));
+            lines.forEach(l => l.classList.add('opacity-40'));
+            stepSuccess.classList.remove('hidden');
+
+            setTimeout(function() {
+              window.open(whatsappUrl, '_blank') || (window.location.href = whatsappUrl);
+            }, 600);
+          }
+
+          if (webhookUrl) {
+            fetch(webhookUrl, {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            }).then(() => {
+              proceedToWhatsApp();
+            }).catch(() => {
+              proceedToWhatsApp();
+            });
+          } else {
+            proceedToWhatsApp();
+          }
+        });
+      }
+
+    })();
+  </script>
 </body>
 </html>
