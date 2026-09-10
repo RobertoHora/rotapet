@@ -432,23 +432,15 @@ function removerAcentos(texto) {
 }
 
 function testarEnvioTelegram() {
-  notificarOracio({
-    dataHora: "10/09/2026 15:00",
-    nome: "Roberto Hora (Teste)",
-    whatsapp: "11992347759",
-    perfil: "Tutor",
-    origem: "São Paulo - SP",
-    destino: "Curitiba - PR",
-    raca: "Spitz Alemão",
-    petDescricao: "1 filhote Spitz Alemão",
-    porte: "Pequeno",
-    qtdPets: 1,
-    vacinasDoc: "Sim (Tudo em dia)",
-    modalidade: "Vaga Executiva",
-    dataPrevista: "15/10/2026",
-    estimativaKm: 410,
-    diasViagem: 1,
-    valorFormatado: "R$ 900,00",
-    msgPronta: "Olá, Roberto! Aqui é o Roberto Hora, da RotaPet."
+  var telegramUrl = "https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendMessage";
+  var payload = {
+    chat_id: TELEGRAM_CHAT_ID,
+    text: "🚗 *Oracio conectado com sucesso à planilha RotaPet!*",
+    parse_mode: "Markdown"
+  };
+  UrlFetchApp.fetch(telegramUrl, {
+    method: "post",
+    contentType: "application/json",
+    payload: JSON.stringify(payload)
   });
 }
