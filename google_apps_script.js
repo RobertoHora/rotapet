@@ -309,6 +309,9 @@ function notificarOracio(dados) {
         "```\n" + dados.msgPronta + "\n```";
 
       var numTelefone = (dados.whatsapp || "").replace(/\D/g, "");
+      if (numTelefone.indexOf("0") === 0) {
+        numTelefone = numTelefone.substring(1);
+      }
       if (numTelefone.length === 10 || numTelefone.length === 11) {
         numTelefone = "55" + numTelefone;
       }
