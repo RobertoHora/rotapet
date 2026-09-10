@@ -7,12 +7,12 @@
  *   Calcula rota rodoviaria real para qualquer cidade do Brasil
  * 
  * Custos Operacionais:
- * - Combustivel: 13,5 km/L a R$ 5,95/L (ida e volta)
- * - Pedagios: R$ 14,50 / 100 km (ida e volta)
+ * - Combustivel: 13,5 km/L a R$ 5,95/L (apenas ida)
+ * - Pedagios: R$ 14,50 / 100 km (apenas ida)
  * - Aluguel de Carro: R$ 150,00 / dia
  * - Alimentacao Estrada: R$ 70,00 / dia
  * - Hotel Pernoite Pet-Friendly: R$ 180,00 / noite (viagens > 1 dia)
- * - Margem Liquida Minima do Roberto: R$ 300,00 / dia por cao
+ * - Margem Liquida Minima do Roberto: R$ 400,00 / dia por cao
  */
 
 // =========================================================================
@@ -170,9 +170,9 @@ function doPost(e) {
       diasViagem = 2;
     }
 
-    // Custos operacionais
-    var combustivel = (estimativaKm * 2 / 13.5) * 5.95;
-    var pedagios = (estimativaKm * 2 / 100) * 14.50;
+    // Custos operacionais (calculados apenas para o trajeto de ida)
+    var combustivel = (estimativaKm / 13.5) * 5.95;
+    var pedagios = (estimativaKm / 100) * 14.50;
     var combustivelPedagio = combustivel + pedagios;
     var aluguelCarro = diasViagem * 150.00;
     var alimentacao = diasViagem * 70.00;
@@ -180,7 +180,7 @@ function doPost(e) {
 
     var custoOperacionalTotal = combustivelPedagio + aluguelCarro +
       alimentacao + pernoiteHotel;
-    var margemRoberto = diasViagem * qtdPets * 300.00;
+    var margemRoberto = diasViagem * qtdPets * 400.00;
 
     var fatorModalidade = (modalidade.toLowerCase().indexOf("exclusivo") !== -1) ? 1.30 : 1.0;
     var valorSugerido = (custoOperacionalTotal + margemRoberto) * fatorModalidade;
