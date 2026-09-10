@@ -430,3 +430,25 @@ function removerAcentos(texto) {
   if (!texto) return "";
   return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
+
+function testarEnvioTelegram() {
+  notificarOracio({
+    dataHora: "10/09/2026 15:00",
+    nome: "Roberto Hora (Teste)",
+    whatsapp: "11992347759",
+    perfil: "Tutor",
+    origem: "São Paulo - SP",
+    destino: "Curitiba - PR",
+    raca: "Spitz Alemão",
+    petDescricao: "1 filhote Spitz Alemão",
+    porte: "Pequeno",
+    qtdPets: 1,
+    vacinasDoc: "Sim (Tudo em dia)",
+    modalidade: "Vaga Executiva",
+    dataPrevista: "15/10/2026",
+    estimativaKm: 410,
+    diasViagem: 1,
+    valorFormatado: "R$ 900,00",
+    msgPronta: "Olá, Roberto! Aqui é o Roberto Hora, da RotaPet."
+  });
+}
